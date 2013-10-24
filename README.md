@@ -1,4 +1,0 @@
-ARQS
-====
-
-AnonymouseRudeQuestionSystems
