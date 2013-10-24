@@ -23,7 +23,7 @@ public class MenuActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
 		
-		 Parse.initialize(this, "WBVUf4oOq6cftucsL3mNG0qONvDCeHoNXPVhCkL4", "nHkSpjqlb75oOpY3rT6cZIXzpeChYguSgnMBva33"); 
+		 Parse.initialize(this, "sOb0qqC2Cetj5Aiw4RAQlLvF4lQEz4tJTobQBG7D", "U6jMtz0vkTqtICvZhvrfKAsKadx56XRi0UfO3yii"); 
 			ParseAnalytics.trackAppOpened(getIntent());
 	}
 
