@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MenuActivity" >
+
+    <TextView
+        android:id="@+id/tvMenuDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_description" />
+
+    <Button
+        android:id="@+id/btnGotoLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvMenuDescription"
+        android:onClick="onLoading"
+        android:text="@string/button_gotoloading" />
+
+    <Button
+        android:id="@+id/btnGotoAccountCreation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btnGotoLoading"
+        android:onClick="onAccountCreation"
+        android:text="@string/button_gotoaccountcreation" />
+
+    <Button
+        android:id="@+id/btnGotoLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btnGotoAccountCreation"
+        android:onClick="onLogin"
+        android:text="@string/button_gotologin" />
+
+    <Button
+        android:id="@+id/btnGotoList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btnGotoLogin"
+        android:onClick="onList"
+        android:text="@string/button_gotolist" />
+
+    <Button
+        android:id="@+id/btnGotoSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btnGotoList"
+        android:onClick="onSubmit"
+        android:text="@string/button_gotosubmit" />
+
+</RelativeLayout>

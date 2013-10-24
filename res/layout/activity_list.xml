@@ -1,0 +1,121 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ListActivity" >
+
+    <EditText
+        android:id="@+id/etListSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="@string/list_searchhint" >
+
+        <requestFocus />
+    </EditText>
+
+    <Spinner
+        android:id="@+id/spnSortFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etListSearch"
+        android:prompt="@string/display_prompt"
+        android:entries="@array/display_order"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btnSubmitQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/spnSortFilter"
+        android:text="@string/button_submitquestion" />
+
+    <TextView
+        android:id="@+id/tvQuestion00001"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btnSubmitQuestion"
+        android:text="@string/question_00001"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Button
+        android:id="@+id/btnDownQuestion00001"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvQuestion00001"
+        android:text="@string/button_down" />
+
+    <Button
+        android:id="@+id/btnUpQuestion00001"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnDownQuestion00001"
+        android:layout_toLeftOf="@+id/btnDownQuestion00001"
+        android:text="@string/button_up" />
+
+    <Button
+        android:id="@+id/btnDownQuestion00002"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvQuestion00002"
+        android:text="@string/button_down" />
+
+    <Button
+        android:id="@+id/btnUpQuestion00002"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnDownQuestion00002"
+        android:layout_toLeftOf="@+id/btnDownQuestion00002"
+        android:text="@string/button_up" />
+
+    <TextView
+        android:id="@+id/tvQuestion00002"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btnDownQuestion00001"
+        android:text="@string/question_00002"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+  
+  	<Button
+        android:id="@+id/btnDownQuestion00003"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvQuestion00003"
+        android:text="@string/button_down" />
+
+    <Button
+        android:id="@+id/btnUpQuestion00003"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnDownQuestion00003"
+        android:layout_toLeftOf="@+id/btnDownQuestion00003"
+        android:text="@string/button_up" />
+
+    <TextView
+        android:id="@+id/tvQuestion00003"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btnDownQuestion00002"
+        android:text="@string/question_00003"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>
