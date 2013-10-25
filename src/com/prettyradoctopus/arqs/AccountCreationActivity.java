@@ -1,4 +1,4 @@
-package com.ubante.arqs;
+package com.prettyradoctopus.arqs;
 
 
 import java.util.UUID;
@@ -7,6 +7,7 @@ import java.util.UUID;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+import com.prettyradoctopus.arqs.R;
 
 import android.os.Bundle;
 import android.provider.Settings.Secure;

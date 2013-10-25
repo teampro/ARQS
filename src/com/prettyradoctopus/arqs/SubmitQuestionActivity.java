@@ -1,16 +1,16 @@
-package com.ubante.arqs;
+package com.prettyradoctopus.arqs;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings.Secure;
-import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.parse.ParseObject;
+import com.prettyradoctopus.arqs.R;
 
 public class SubmitQuestionActivity extends Activity {
 

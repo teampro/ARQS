@@ -1,16 +1,12 @@
-package com.ubante.arqs;
-
-import java.util.UUID;
+package com.prettyradoctopus.arqs;
 
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
-
-import android.telephony.TelephonyManager;
+import com.prettyradoctopus.arqs.R;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;

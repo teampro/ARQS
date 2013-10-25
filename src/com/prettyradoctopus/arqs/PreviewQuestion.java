@@ -1,6 +1,7 @@
-package com.ubante.arqs;
+package com.prettyradoctopus.arqs;
 
 import com.parse.ParseObject;
+import com.prettyradoctopus.arqs.R;
 
 import android.os.Bundle;
 import android.provider.Settings.Secure;
@@ -8,7 +9,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
