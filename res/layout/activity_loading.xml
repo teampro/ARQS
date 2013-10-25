@@ -28,4 +28,13 @@
         android:text="@string/loading_byline"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <Button
+        android:id="@+id/btnEnter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvLoadingByline"
+        android:layout_centerHorizontal="true"
+        android:onClick="onEnter"
+        android:text="@string/button_enter" />
+
 </RelativeLayout>

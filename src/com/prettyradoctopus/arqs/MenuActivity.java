@@ -31,7 +31,7 @@ public class MenuActivity extends Activity {
 	}
 
 	public void onLoading(View v) {
-		Toast.makeText(this, "Switching to Loading", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "Switching to Loading", Toast.LENGTH_SHORT).show();
 		Intent loadingIntent = new Intent(this, LoadingActivity.class);
 		startActivity(loadingIntent);
 	}
@@ -60,5 +60,11 @@ public class MenuActivity extends Activity {
 		submitIntent.putExtra("subject", "");
 		submitIntent.putExtra("question", "");
 		startActivity(submitIntent);
+	}
+	
+	public void onQuestions(View v) {
+		Toast.makeText(this, "Switching to List", Toast.LENGTH_SHORT).show();
+		Intent listIntent = new Intent(this, QuestionsActivity.class);
+		startActivity(listIntent);
 	}
 }

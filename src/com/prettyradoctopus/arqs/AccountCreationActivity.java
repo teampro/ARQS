@@ -1,8 +1,6 @@
 package com.prettyradoctopus.arqs;
 
-
 import java.util.UUID;
-
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -19,25 +17,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
-
-
 public class AccountCreationActivity extends Activity {
 
 	EditText etPassphrase;
 	public String go_no_go;
 	public UUID uuid;
 	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_account_creation);
-		
-		
+			
 		etPassphrase = (EditText) findViewById(R.id.etPassphrase);
-
-
 	}
 
 	@Override
@@ -62,9 +53,7 @@ public class AccountCreationActivity extends Activity {
 			 user.setUsername(u);
 			 user.setPassword(passphrase);
 		//	 user.setEmail("email@example.com");
-			 
-			 
-			 
+
 			 user.signUpInBackground(new SignUpCallback() {
 				  public void done(ParseException e) {
 				    if (e == null) {
@@ -81,33 +70,20 @@ public class AccountCreationActivity extends Activity {
 				    	
 				    }
 				  }
-				});
-			 
+				});	 
 		 }
 		 else {
-			 Toast.makeText(this, "Nothing here", Toast.LENGTH_LONG).show();
-			 
-
-			 
-				
+			 Toast.makeText(this, "Empty passphrases are not allowed", Toast.LENGTH_LONG).show();
 		 }
 	}
 
 	protected void myUserSignUpDidNotSucceed(String error) {
-		Toast.makeText(this, error, Toast.LENGTH_LONG).show();
-		
+		Toast.makeText(this, error, Toast.LENGTH_LONG).show();		
 	}
 
 	protected void myUserSignedUpSuccessfully() {
 		Toast.makeText(this, "Hurray, you have signed up successfully", Toast.LENGTH_LONG).show();
-		Intent i = new Intent(this, LoginActivity.class);
-   	 	startActivity(i);
-		
+		Intent i = new Intent(this, ListActivity.class);
+   	 	startActivity(i);		
 	}
-	
-	  
-	
-	
-	
-
 }

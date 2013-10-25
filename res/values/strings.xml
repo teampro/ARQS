@@ -47,13 +47,15 @@
     </string-array>
 
     <string name="title_activity_menu">MenuActivity</string>
-    <string name="menu_description">This is a simple page to get to all the wire frames.</string>
+    <string name="menu_description">This is a simple page to get to all the wire frames.  When we are done, we will launch directly into the Loading activity and make a backdoor to this activity.</string>
     <string name="button_gotoloading">Go to Loading Page</string>
     <string name="button_gotoaccountcreation">Go to Account Creation Page</string>
     <string name="button_gotologin">Go to Login Page</string>
-    <string name="button_gotolist">Go to List Page</string>
+    <string name="button_gotolist">Go to mocked up List Page</string>
     <string name="button_gotosubmit">Go to Submit Page</string>
     <string name="title_activity_fragement_submit_question">Fragement_submit_question</string>
     <string name="title_activity_preview_question">PreviewQuestion</string>
+    <string name="button_gotoquestions">Go to Questions Page</string>
+    <string name="title_activity_questions">QuestionsActivity</string>
 
 </resources>

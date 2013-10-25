@@ -59,4 +59,13 @@
         android:onClick="onSubmit"
         android:text="@string/button_gotosubmit" />
 
+    <Button
+        android:id="@+id/btnGotoQuestions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btnGotoSubmit"
+        android:onClick="onQuestions"
+        android:text="@string/button_gotoquestions" />
+
 </RelativeLayout>
