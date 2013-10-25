@@ -57,5 +57,6 @@
     <string name="title_activity_preview_question">PreviewQuestion</string>
     <string name="button_gotoquestions">Go to Questions Page</string>
     <string name="title_activity_questions">QuestionsActivity</string>
-
+    <string name="action_compose">Compose</string>
+    <string name="action_refresh">Refresh</string>
 </resources>

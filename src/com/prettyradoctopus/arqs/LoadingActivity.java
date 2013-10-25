@@ -3,8 +3,15 @@ package com.prettyradoctopus.arqs;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings.Secure;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
+
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 public class LoadingActivity extends Activity {
 
@@ -22,13 +29,29 @@ public class LoadingActivity extends Activity {
 	}
 	
 	public void onEnter(View v) {
-		Intent i;
-		
+		String u = Secure.getString(this.getContentResolver(),Secure.ANDROID_ID);
+
 		// Check with parse to see if this user already exists.
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
+		query.whereEqualTo("username", u);
+		query.getFirstInBackground(new GetCallback<ParseObject>() {
+		  public void done(ParseObject object, ParseException e) {
+		    if (object == null) {
+				// If no, then go to AccountCreation activity
+				Toast.makeText(LoadingActivity.this, "Hello Stranger, let's create an account for you", Toast.LENGTH_SHORT).show();
+				Intent i = new Intent(LoadingActivity.this, AccountCreationActivity.class);
+				startActivity(i);
+		    } else {
+				// If yes, then go to Login activy 
+				Toast.makeText(LoadingActivity.this, "Welcome back to ARQS", Toast.LENGTH_SHORT).show();
+				Intent i = new Intent(LoadingActivity.this, LoginActivity.class);
+				startActivity(i);
+		    }
+		  }
+		});
+		
 		// If yes, then go to Login activy else go to AccountCreation activity
-		// Go back to Menu for now
-		i = new Intent(this, MenuActivity.class);
-		startActivity(i);
+
 	}
 
 }

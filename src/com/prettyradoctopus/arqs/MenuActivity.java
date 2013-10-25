@@ -63,7 +63,7 @@ public class MenuActivity extends Activity {
 	}
 	
 	public void onQuestions(View v) {
-		Toast.makeText(this, "Switching to List", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "Switching to Questions", Toast.LENGTH_SHORT).show();
 		Intent listIntent = new Intent(this, QuestionsActivity.class);
 		startActivity(listIntent);
 	}
