@@ -12,7 +12,7 @@
     <string name="accountcreation_instructionsbottom">"Your anonymous username will be “ARQSNAME”.  If you do not like this, change your passphrase.  If you do like this, then click the below button. "</string>
     <string name="button_enter">Enter ARQS</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="login_welcom">Hello FirstName LastName.  Enter your passphrase to continue.\n</string>
+    <string name="login_welcom">Hello.  Enter your passphrase to continue.\n</string>
     <string name="login_passphrasehint">Enter passphrase</string>
     <string name="title_activity_list">ListActivity</string>
     <string name="list_searchhint">Search….</string>
@@ -30,8 +30,11 @@
     <string name="button_cancel">Cancel</string>
     <string name="button_submit">Submit</string>
     <string name="submit_instructionsbottom">Preview your Rude Question: </string>
-    <string name="button_confirm">Confirm</string>
-	<string name="display_prompt">Choose a display order</string>
+    <string name="button_preview">Preview</string>
+    <string name="display_prompt">Choose a display order</string>
+    <string name="question_preview">Here is what your rude question looks like</string>
+    <string name="edit">Edit</string>
+
     <string-array name="display_order">
         <item>Most Recent</item>
         <item>Oldest</item>
@@ -44,17 +47,13 @@
     </string-array>
 
     <string name="title_activity_menu">MenuActivity</string>
-
     <string name="menu_description">This is a simple page to get to all the wire frames.</string>
-
     <string name="button_gotoloading">Go to Loading Page</string>
-
     <string name="button_gotoaccountcreation">Go to Account Creation Page</string>
-
     <string name="button_gotologin">Go to Login Page</string>
-
     <string name="button_gotolist">Go to List Page</string>
-
     <string name="button_gotosubmit">Go to Submit Page</string>
+    <string name="title_activity_fragement_submit_question">Fragement_submit_question</string>
+    <string name="title_activity_preview_question">PreviewQuestion</string>
 
 </resources>

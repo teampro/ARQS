@@ -7,9 +7,11 @@
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="18" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -44,6 +46,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.ubante.arqs.Fragement_submit_question"
+            android:label="@string/title_activity_fragement_submit_question" >
+        </activity>
+        <activity
+            android:name="com.ubante.arqs.PreviewQuestion"
+            android:label="@string/title_activity_preview_question" >
         </activity>
     </application>
 

@@ -1,62 +1,45 @@
 package com.ubante.arqs;
 
-import android.app.Activity;
-import android.content.Intent;
+import com.parse.ParseObject;
+
 import android.os.Bundle;
 import android.provider.Settings.Secure;
-import android.support.v4.app.FragmentActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.ParseObject;
+public class PreviewQuestion extends Activity {
 
-public class SubmitQuestionActivity extends Activity {
-
-	String subject = null;
-	String question = null;
-	
-	String body = null;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_submit_question);
+		setContentView(R.layout.activity_preview_question);
 		
 		Bundle extras = getIntent().getExtras();
-		 subject = extras.getString("subject");
-		 question = extras.getString("question");
+		String subject = extras.getString("subject");
+		String question = extras.getString("question");
 		
-		if((subject != "") && (question != "")){
-			EditText etSubject = (EditText) findViewById(R.id.etSubject);
-			etSubject.setText(subject);
-			EditText etQuestion = (EditText) findViewById(R.id.etQuestion);
-			etQuestion.setText(question);	
-		}
+		TextView tvSubject = (TextView) findViewById(R.id.tvPreviewSubject);
+		tvSubject.setText(subject);
 		
+		TextView tvQuestion = (TextView) findViewById(R.id.tvPreviewQuestion);
+		tvQuestion.setText(question);
+	
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.submit_question, menu);
+		getMenuInflater().inflate(R.menu.preview_question, menu);
 		return true;
-	}
-
-	public void onPreview(View v){
-		String subject = getSubject(v);
-		String question = getQuestion(v);
-		
-		Intent i = new Intent(this, PreviewQuestion.class);
-	   	i.putExtra("subject", subject);
-	   	i.putExtra("question", question);
-		startActivity(i);
-		
 	}
 	
 	public void onSubmit(View v){
-		String u = Secure.getString(this.getContentResolver(),Secure.ANDROID_ID);
+	String u = Secure.getString(this.getContentResolver(),Secure.ANDROID_ID);
 		
 		String subject = getSubject(v);
 		String question = getQuestion(v);
@@ -81,10 +64,19 @@ public class SubmitQuestionActivity extends Activity {
 		 }
 		 else {
 			 Toast.makeText(this, "You forgot to put something in the subject!", Toast.LENGTH_SHORT).show();
-		 }
-		
+		 }	
 	}
 	
+	public void onEdit(View v){
+		String subject = getSubject(v);
+		String question = getQuestion(v);
+		
+		Intent i = new Intent(this, SubmitQuestionActivity.class);
+	   	i.putExtra("subject", subject);
+	   	i.putExtra("question", question);
+		startActivity(i);
+		
+	}
 	
 	public void onCancel(View v){
 		 Intent i = new Intent(this, ListActivity.class);
@@ -92,15 +84,15 @@ public class SubmitQuestionActivity extends Activity {
 	}
 	
 	public String getSubject(View v){
-		EditText tempsubject = (EditText) findViewById(R.id.etSubject);
+		TextView tempsubject = (TextView) findViewById(R.id.tvPreviewSubject);
 		String subject = tempsubject.getText().toString();
 		return subject;
 	}
 	
 	public String getQuestion(View v){
-		EditText tempbody = (EditText) findViewById(R.id.etQuestion);
+		TextView tempbody = (TextView) findViewById(R.id.tvPreviewQuestion);
 		String body = tempbody.getText().toString();
 		return body;
 	}
-	
+
 }

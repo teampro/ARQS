@@ -61,6 +61,8 @@ public class MenuActivity extends Activity {
 	public void onSubmit(View v) {
 		Toast.makeText(this, "Switching to Submit", Toast.LENGTH_SHORT).show();
 		Intent submitIntent = new Intent(this, SubmitQuestionActivity.class);
+		submitIntent.putExtra("subject", "");
+		submitIntent.putExtra("question", "");
 		startActivity(submitIntent);
 	}
 }

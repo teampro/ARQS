@@ -25,14 +25,13 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int background_thumbs_25kb=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f090024;
+        public static final int action_settings=0x7f090027;
         public static final int btnAccountCreationEnter=0x7f090003;
-        public static final int btnCancel1=0x7f09001f;
-        public static final int btnCancel2=0x7f090022;
-        public static final int btnConfirm=0x7f090023;
+        public static final int btnCancel1=0x7f090024;
         public static final int btnDownQuestion00001=0x7f090008;
         public static final int btnDownQuestion00002=0x7f09000a;
         public static final int btnDownQuestion00003=0x7f09000d;
@@ -42,7 +41,11 @@ public final class R {
         public static final int btnGotoLogin=0x7f090018;
         public static final int btnGotoSubmit=0x7f09001a;
         public static final int btnLoginEnter=0x7f090014;
-        public static final int btnSubmit=0x7f090020;
+        public static final int btnPreview=0x7f090026;
+        public static final int btnPreviewCancel=0x7f09001f;
+        public static final int btnPreviewEdit=0x7f090020;
+        public static final int btnPreviewSubmit=0x7f09001e;
+        public static final int btnSubmit=0x7f090025;
         public static final int btnSubmitQuestion=0x7f090006;
         public static final int btnUpQuestion00001=0x7f090009;
         public static final int btnUpQuestion00002=0x7f09000c;
@@ -50,37 +53,43 @@ public final class R {
         public static final int etListSearch=0x7f090004;
         public static final int etLoginPassphrase=0x7f090013;
         public static final int etPassphrase=0x7f090001;
-        public static final int etQuestion=0x7f09001d;
-        public static final int etSubject=0x7f09001c;
+        public static final int etQuestion=0x7f090023;
+        public static final int etSubject=0x7f090022;
         public static final int spnSortFilter=0x7f090005;
+        public static final int textView2=0x7f09001b;
         public static final int tvAccountCreationInstructionsBottom=0x7f090002;
         public static final int tvAccountCreationInstructionsTop=0x7f090000;
         public static final int tvLoadingByline=0x7f090011;
         public static final int tvLoadingTitle=0x7f090010;
         public static final int tvLoginWelcome=0x7f090012;
         public static final int tvMenuDescription=0x7f090015;
+        public static final int tvPreviewQuestion=0x7f09001d;
+        public static final int tvPreviewSubject=0x7f09001c;
         public static final int tvQuestion00001=0x7f090007;
         public static final int tvQuestion00002=0x7f09000b;
         public static final int tvQuestion00003=0x7f09000e;
-        public static final int tvSubmitInstructionsBottom=0x7f090021;
-        public static final int tvSubmitInstructionsMiddle=0x7f09001e;
-        public static final int tvSubmitInstructionsTop=0x7f09001b;
+        public static final int tvSubmitInstructionsTop=0x7f090021;
     }
     public static final class layout {
         public static final int activity_account_creation=0x7f030000;
-        public static final int activity_list=0x7f030001;
-        public static final int activity_loading=0x7f030002;
-        public static final int activity_login=0x7f030003;
-        public static final int activity_menu=0x7f030004;
-        public static final int activity_submit_question=0x7f030005;
+        public static final int activity_fragement_submit_question=0x7f030001;
+        public static final int activity_list=0x7f030002;
+        public static final int activity_loading=0x7f030003;
+        public static final int activity_login=0x7f030004;
+        public static final int activity_menu=0x7f030005;
+        public static final int activity_preview_question=0x7f030006;
+        public static final int activity_submit_question=0x7f030007;
+        public static final int fragments_submit_question=0x7f030008;
     }
     public static final class menu {
         public static final int account_creation=0x7f080000;
-        public static final int list=0x7f080001;
-        public static final int loading=0x7f080002;
-        public static final int login=0x7f080003;
-        public static final int menu=0x7f080004;
-        public static final int submit_question=0x7f080005;
+        public static final int fragement_submit_question=0x7f080001;
+        public static final int list=0x7f080002;
+        public static final int loading=0x7f080003;
+        public static final int login=0x7f080004;
+        public static final int menu=0x7f080005;
+        public static final int preview_question=0x7f080006;
+        public static final int submit_question=0x7f080007;
     }
     public static final class string {
         public static final int accountcreation_instructionsbottom=0x7f050008;
@@ -89,37 +98,41 @@ public final class R {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
         public static final int button_cancel=0x7f05001a;
-        public static final int button_confirm=0x7f05001d;
         public static final int button_down=0x7f050012;
         public static final int button_enter=0x7f050009;
-        public static final int button_gotoaccountcreation=0x7f050022;
-        public static final int button_gotolist=0x7f050024;
-        public static final int button_gotoloading=0x7f050021;
-        public static final int button_gotologin=0x7f050023;
-        public static final int button_gotosubmit=0x7f050025;
+        public static final int button_gotoaccountcreation=0x7f050024;
+        public static final int button_gotolist=0x7f050026;
+        public static final int button_gotoloading=0x7f050023;
+        public static final int button_gotologin=0x7f050025;
+        public static final int button_gotosubmit=0x7f050027;
+        public static final int button_preview=0x7f05001d;
         public static final int button_submit=0x7f05001b;
         public static final int button_submitquestion=0x7f05000f;
         public static final int button_up=0x7f050011;
         public static final int display_prompt=0x7f05001e;
+        public static final int edit=0x7f050020;
         public static final int hello_world=0x7f050002;
         public static final int list_searchhint=0x7f05000e;
         public static final int load_title=0x7f050003;
         public static final int loading_byline=0x7f050004;
         public static final int login_passphrasehint=0x7f05000c;
         public static final int login_welcom=0x7f05000b;
-        public static final int menu_description=0x7f050020;
+        public static final int menu_description=0x7f050022;
         public static final int question_00001=0x7f050010;
         public static final int question_00002=0x7f050013;
         public static final int question_00003=0x7f050014;
+        public static final int question_preview=0x7f05001f;
         public static final int submit_instructionsbottom=0x7f05001c;
         public static final int submit_instructionsmiddle=0x7f050019;
         public static final int submit_instructionstop=0x7f050016;
         public static final int submit_questionhint=0x7f050018;
         public static final int submit_subjecthint=0x7f050017;
         public static final int title_activity_account_creation=0x7f050005;
+        public static final int title_activity_fragement_submit_question=0x7f050028;
         public static final int title_activity_list=0x7f05000d;
         public static final int title_activity_login=0x7f05000a;
-        public static final int title_activity_menu=0x7f05001f;
+        public static final int title_activity_menu=0x7f050021;
+        public static final int title_activity_preview_question=0x7f050029;
         public static final int title_activity_submit_question=0x7f050015;
     }
     public static final class style {

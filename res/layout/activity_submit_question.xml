@@ -38,22 +38,14 @@
         android:ems="10"
         android:hint="@string/submit_questionhint" />
 
-    <TextView
-        android:id="@+id/tvSubmitInstructionsMiddle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/etQuestion"
-        android:text="@string/submit_instructionsmiddle"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
     <Button
         android:id="@+id/btnCancel1"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvSubmitInstructionsMiddle"
+        android:layout_below="@+id/etQuestion"
+        android:onClick="onCancel"
         android:text="@string/button_cancel" />
 
     <Button
@@ -63,33 +55,17 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/btnCancel1"
         android:layout_toLeftOf="@+id/btnCancel1"
+        android:onClick="onSubmit"
         android:text="@string/button_submit" />
 
-    <TextView
-        android:id="@+id/tvSubmitInstructionsBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/btnSubmit"
-        android:text="@string/submit_instructionsbottom"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
     <Button
-        android:id="@+id/btnCancel2"
+        android:id="@+id/btnPreview"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvSubmitInstructionsBottom"
-        android:text="@string/button_cancel" />
-
-    <Button
-        android:id="@+id/btnConfirm"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btnSubmit"
-        android:layout_alignTop="@+id/btnCancel2"
-        android:text="@string/button_confirm" />
+        android:layout_below="@+id/etQuestion"
+        android:layout_toLeftOf="@+id/btnSubmit"
+        android:onClick="onPreview"
+        android:text="@string/button_preview" />
 
 </RelativeLayout>
