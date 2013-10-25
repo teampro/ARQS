@@ -21,7 +21,6 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		
 		etLoginPassphrase = (EditText) findViewById(R.id.etLoginPassphrase);
 	}
 
@@ -36,38 +35,34 @@ public class LoginActivity extends Activity {
 		String u = Secure.getString(this.getContentResolver(),Secure.ANDROID_ID);
 		String loginpassphrase = etLoginPassphrase.getText().toString();
 		// Log.d("DEBUG", u);
-		 if(!"".equals(loginpassphrase) && loginpassphrase != null) {
-			 Toast.makeText(this, u, Toast.LENGTH_LONG).show();
-			 
-			 ParseUser.logInInBackground(u, loginpassphrase, new LogInCallback() {
-				  public void done(ParseUser user, ParseException e) {
-				    if (user != null) {
-				      // Hooray! The user is logged in.
-				    	myUserLogInSuccessfully();
-				    } else {
-				      // Signup failed. Look at the ParseException to see what happened.
-				    	String error = e.toString();
-				    	myUserLogInDidNotSucceed(error);
-				    }
-				  }
-				});
-			 
+		if(!"".equals(loginpassphrase) && loginpassphrase != null) {
+			Toast.makeText(this, u, Toast.LENGTH_LONG).show();
+			ParseUser.logInInBackground(u, loginpassphrase, new LogInCallback() {
+				public void done(ParseUser user, ParseException e) {
+					if (user != null) {
+						// Hooray! The user is logged in.
+						myUserLogInSuccessfully();
+					} else {
+						// Signup failed. Look at the ParseException to see what happened.
+						String error = e.toString();
+						myUserLogInDidNotSucceed(error);
+					}
+				}
+			});
+		}
+		else {
+			Toast.makeText(this, "Nothing here", Toast.LENGTH_LONG).show();
+		}
 	}
-		 else {
-			 Toast.makeText(this, "Nothing here", Toast.LENGTH_LONG).show();
-		 }
-	}
-	
+
 	protected void myUserLogInDidNotSucceed(String error) {
 		Toast.makeText(this, error, Toast.LENGTH_LONG).show();
 		
 	}
 
 	protected void myUserLogInSuccessfully() {
-		Toast.makeText(this, "Hurray, you have Loged In successfully", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "Hurrah, you have logged in successfully", Toast.LENGTH_LONG).show();
 		Intent i = new Intent(this, ListActivity.class);
    	 	startActivity(i);
 	}
-	
-
 }

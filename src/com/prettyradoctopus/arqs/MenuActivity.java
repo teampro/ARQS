@@ -18,9 +18,10 @@ public class MenuActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
-		
-		 Parse.initialize(this, "sOb0qqC2Cetj5Aiw4RAQlLvF4lQEz4tJTobQBG7D", "U6jMtz0vkTqtICvZhvrfKAsKadx56XRi0UfO3yii"); 
-			ParseAnalytics.trackAppOpened(getIntent());
+
+		Parse.initialize(this, "sOb0qqC2Cetj5Aiw4RAQlLvF4lQEz4tJTobQBG7D", 
+				"U6jMtz0vkTqtICvZhvrfKAsKadx56XRi0UfO3yii"); 
+		ParseAnalytics.trackAppOpened(getIntent());
 	}
 
 	@Override
@@ -64,7 +65,7 @@ public class MenuActivity extends Activity {
 	
 	public void onQuestions(View v) {
 		Toast.makeText(this, "Switching to Questions", Toast.LENGTH_SHORT).show();
-		Intent listIntent = new Intent(this, QuestionsActivity.class);
+		Intent listIntent = new Intent(this, QuestionsListActivity.class);
 		startActivity(listIntent);
 	}
 }

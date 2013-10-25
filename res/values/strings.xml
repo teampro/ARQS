@@ -59,4 +59,6 @@
     <string name="title_activity_questions">QuestionsActivity</string>
     <string name="action_compose">Compose</string>
     <string name="action_refresh">Refresh</string>
+   	<string name="question_item">question item</string>
+    
 </resources>

@@ -66,10 +66,10 @@ public class SubmitQuestionActivity extends Activity {
 			 Toast.makeText(this, subject, Toast.LENGTH_SHORT).show();
 			 Toast.makeText(this, question, Toast.LENGTH_SHORT).show();
 			 
-			 ParseObject topic = new ParseObject("questions");
-			 topic.put("tittle", subject);
-			 topic.put("body_content", question);
-			 topic.put("username", u);
+			 ParseObject topic = new ParseObject("questions"); // XXX change to Questions
+			 topic.put("tittle", subject); // XXX change to "title"
+			 topic.put("body_content", question); // XXX change to bodyContent
+			 topic.put("username", u); 
 			 topic.saveInBackground();
 			 
 			 Toast.makeText(this, "Saved! Sending you back to the list of questions", Toast.LENGTH_SHORT).show();

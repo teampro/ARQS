@@ -49,9 +49,5 @@ public class LoadingActivity extends Activity {
 		    }
 		  }
 		});
-		
-		// If yes, then go to Login activy else go to AccountCreation activity
-
 	}
-
 }
