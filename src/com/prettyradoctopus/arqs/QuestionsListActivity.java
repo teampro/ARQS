@@ -1,6 +1,5 @@
 package com.prettyradoctopus.arqs;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -70,7 +69,7 @@ public class QuestionsListActivity extends Activity {
 		            Toast.makeText(QuestionsListActivity.this, 
 		            		"found: " + poQuestionList.size(),
 		            		Toast.LENGTH_SHORT).show();
-		            //drawPage(poQuestionList);
+		            drawPage(Question.convertFromParseObjects(poQuestionList));
 		        } else {
 		        	Toast.makeText(QuestionsListActivity.this, 
 		            		"Error pulling questions",
@@ -78,15 +77,22 @@ public class QuestionsListActivity extends Activity {
 		        }
 		    }
 
-			private void drawPage(List<ParseObject> poQuestionList) {
+			private void drawPage(List<Question> questionList) {
 				// We have to convert from ParseObject to Question
-				ArrayList<Question> questionList = 
-						Question.convertFromParseObjects(poQuestionList);
 				
-				QuestionsAdapter qa = new QuestionsAdapter(getBaseContext(),
-						questionList);
+				Toast.makeText(QuestionsListActivity.this, "drawing: " + questionList.size(),
+	            		Toast.LENGTH_SHORT).show();
+				
+/*				for (int i=0; i < questionList.size(); i++) {
+					String toastString = i + " " + questionList.get(i).getTitle();
+					Toast.makeText(QuestionsListActivity.this, toastString,
+		            		Toast.LENGTH_SHORT).show();
+				}*/
+				
+				QuestionsAdapter adapter = new QuestionsAdapter(getBaseContext(), questionList);
 				ListView lvQuestions = (ListView) findViewById(R.id.lvQuestions);
-				lvQuestions.setAdapter(qa);
+				lvQuestions.setAdapter(adapter);
+				
 			}
 		});
 		

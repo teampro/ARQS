@@ -14,31 +14,49 @@ import com.parse.ParseObject;
  * For more details, see https://parse.com/docs/android_guide#subclasses
  */
 
-public class Question extends ParseObject {
-	ParseObject q = new ParseObject("questions");
+public class Question {
+	//ParseObject q = new ParseObject("questions");
+	String user, body, title;
 	
-	public User getUser() {
-		return null;
+	public String getUser() {
+		return user;
 	}
 
 	public String getBody() {
-		return null;
+		return body;
 	}
 
 	public String getTitle() {
-		return q.getString("tittle");
+		return title;
+	}
+
+	public void addTitle(String s) {
+		title = s;
+	}
+
+	public void addBody(String s) {
+		body = s;
+	}
+
+	public void addUser(String s) {
+		user = s;
 	}
 
 	public static ArrayList<Question> convertFromParseObjects(
 			List<ParseObject> poQuestionList) {
 		// Loop through the input, which is of type List, and put its
 		// contents into an ArrayList.
-		ArrayList<Question> ar = new ArrayList<Question>();
+		ArrayList<Question> al = new ArrayList<Question>();
 		
-		for (ParseObject p : poQuestionList) {
-			ar.add( (Question) p);
+		for (ParseObject po : poQuestionList) {
+			Question q = new Question();
+			q.addTitle((String) po.get("tittle"));
+			q.addBody((String) po.get("body_content"));
+			q.addUser((String) po.get("username"));
+			
+			al.add(q);
 		}
 
-		return ar;
+		return al;
 	}
 }

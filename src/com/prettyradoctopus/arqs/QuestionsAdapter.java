@@ -36,7 +36,8 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
 		bodyView.setText(Html.fromHtml(question.getBody()));
 		
 		TextView usernameView = (TextView) view.findViewById(R.id.tvUsername);
-		usernameView.setText(Html.fromHtml(question.getUser().getUsername()));
+		String formattedUsername = "<i>" + question.getUser() + "</i>";
+		usernameView.setText(Html.fromHtml(formattedUsername));
 		
 		return view;
 	}
