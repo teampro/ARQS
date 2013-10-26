@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class PreviewQuestion extends Activity {
+public class PreviewQuestionActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +46,8 @@ public class PreviewQuestion extends Activity {
 		
 		
 		 if(!"".equals(subject) && subject != null && !"".equals(question) && question != null) {
-			 Toast.makeText(this, subject, Toast.LENGTH_SHORT).show();
-			 Toast.makeText(this, question, Toast.LENGTH_SHORT).show();
+			 //Toast.makeText(this, subject, Toast.LENGTH_SHORT).show();
+			 //Toast.makeText(this, question, Toast.LENGTH_SHORT).show();
 			 
 			 ParseObject topic = new ParseObject("questions");
 			 topic.put("tittle", subject);
@@ -55,8 +55,8 @@ public class PreviewQuestion extends Activity {
 			 topic.put("username", u);
 			 topic.saveInBackground();
 			 
-			 Toast.makeText(this, "Saved! Sending you back to the list of questions", Toast.LENGTH_SHORT).show();
-			 Intent i = new Intent(this, ListActivity.class);
+			 Toast.makeText(this, "Question submitted", Toast.LENGTH_SHORT).show();
+			 Intent i = new Intent(this, QuestionsListActivity.class);
 		   	 startActivity(i);
 		 }
 		 else if(!"".equals(subject) && subject != null) {
@@ -79,7 +79,7 @@ public class PreviewQuestion extends Activity {
 	}
 	
 	public void onCancel(View v){
-		 Intent i = new Intent(this, ListActivity.class);
+		 Intent i = new Intent(this, QuestionsListActivity.class);
 	   	 startActivity(i);
 	}
 	

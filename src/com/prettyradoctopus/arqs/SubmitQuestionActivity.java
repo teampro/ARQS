@@ -13,28 +13,25 @@ import com.parse.ParseObject;
 import com.prettyradoctopus.arqs.R;
 
 public class SubmitQuestionActivity extends Activity {
-
 	String subject = null;
 	String question = null;
-	
 	String body = null;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_submit_question);
-		
+
 		Bundle extras = getIntent().getExtras();
-		 subject = extras.getString("subject");
-		 question = extras.getString("question");
-		
+		subject = extras.getString("subject");
+		question = extras.getString("question");
+
 		if((subject != "") && (question != "")){
 			EditText etSubject = (EditText) findViewById(R.id.etSubject);
 			etSubject.setText(subject);
 			EditText etQuestion = (EditText) findViewById(R.id.etQuestion);
 			etQuestion.setText(question);	
 		}
-		
 	}
 
 	@Override
@@ -48,7 +45,7 @@ public class SubmitQuestionActivity extends Activity {
 		String subject = getSubject(v);
 		String question = getQuestion(v);
 		
-		Intent i = new Intent(this, PreviewQuestion.class);
+		Intent i = new Intent(this, PreviewQuestionActivity.class);
 	   	i.putExtra("subject", subject);
 	   	i.putExtra("question", question);
 		startActivity(i);
@@ -63,8 +60,8 @@ public class SubmitQuestionActivity extends Activity {
 		
 		
 		 if(!"".equals(subject) && subject != null && !"".equals(question) && question != null) {
-			 Toast.makeText(this, subject, Toast.LENGTH_SHORT).show();
-			 Toast.makeText(this, question, Toast.LENGTH_SHORT).show();
+			 //Toast.makeText(this, subject, Toast.LENGTH_SHORT).show();
+			 //Toast.makeText(this, question, Toast.LENGTH_SHORT).show();
 			 
 			 ParseObject topic = new ParseObject("questions"); // XXX change to Questions
 			 topic.put("tittle", subject); // XXX change to "title"
@@ -72,22 +69,22 @@ public class SubmitQuestionActivity extends Activity {
 			 topic.put("username", u); 
 			 topic.saveInBackground();
 			 
-			 Toast.makeText(this, "Saved! Sending you back to the list of questions", Toast.LENGTH_SHORT).show();
-			 Intent i = new Intent(this, ListActivity.class);
+			 //Toast.makeText(this, "Saved! Sending you back to the list of questions", Toast.LENGTH_SHORT).show();
+			 Intent i = new Intent(this, QuestionsListActivity.class);
 		   	 startActivity(i);
 		 }
 		 else if(!"".equals(subject) && subject != null) {
-			 Toast.makeText(this, "You forgot to put something in the body!", Toast.LENGTH_SHORT).show();
+			 Toast.makeText(this, "You forgot to put something in the body!", 
+					 Toast.LENGTH_SHORT).show();
 		 }
 		 else {
-			 Toast.makeText(this, "You forgot to put something in the subject!", Toast.LENGTH_SHORT).show();
+			 Toast.makeText(this, "You forgot to put something in the subject!", 
+					 Toast.LENGTH_SHORT).show();
 		 }
-		
 	}
 	
-	
 	public void onCancel(View v){
-		 Intent i = new Intent(this, ListActivity.class);
+		 Intent i = new Intent(this, QuestionsListActivity.class);
 	   	 startActivity(i);
 	}
 	
@@ -102,5 +99,4 @@ public class SubmitQuestionActivity extends Activity {
 		String body = tempbody.getText().toString();
 		return body;
 	}
-	
 }

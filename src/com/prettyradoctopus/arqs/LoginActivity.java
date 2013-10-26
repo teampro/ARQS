@@ -51,7 +51,8 @@ public class LoginActivity extends Activity {
 			});
 		}
 		else {
-			Toast.makeText(this, "Nothing here", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Empty passphrases are not allowed", 
+					Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -61,8 +62,9 @@ public class LoginActivity extends Activity {
 	}
 
 	protected void myUserLogInSuccessfully() {
-		Toast.makeText(this, "Hurrah, you have logged in successfully", Toast.LENGTH_LONG).show();
-		Intent i = new Intent(this, ListActivity.class);
+		Toast.makeText(this, "Hurrah, you have logged in successfully", 
+				Toast.LENGTH_LONG).show();
+		Intent i = new Intent(this, QuestionsListActivity.class);
    	 	startActivity(i);
 	}
 }

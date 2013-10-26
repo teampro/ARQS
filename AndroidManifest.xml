@@ -51,7 +51,7 @@
             android:label="@string/title_activity_fragement_submit_question" >
         </activity>
         <activity
-            android:name="com.prettyradoctopus.arqs.PreviewQuestion"
+            android:name="com.prettyradoctopus.arqs.PreviewQuestionActivity"
             android:label="@string/title_activity_preview_question" >
         </activity>
         <activity

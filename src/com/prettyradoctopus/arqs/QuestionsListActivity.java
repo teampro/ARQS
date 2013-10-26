@@ -3,6 +3,7 @@ package com.prettyradoctopus.arqs;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,7 +28,7 @@ public class QuestionsListActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_questions);
+		setContentView(R.layout.activity_questions_list);
 		refreshQuestions();
 	}
 
@@ -48,27 +49,29 @@ public class QuestionsListActivity extends Activity {
 	}
 	
 	private void composeQuestion() {
-		Toast.makeText(this, "wierd bug - XXX", Toast.LENGTH_SHORT).show();
-
-/*		Intent i = new Intent(this, SubmitQuestionActivity.class);
+		Intent i = new Intent(this, SubmitQuestionActivity.class);
+		i.putExtra("subject", "");
+		i.putExtra("question", "");
 		startActivity(i);
-
-*/	}
+	}
 
 	/* 
 	 * This is used when the page is first created and whenever the page is
-	 * refreshed
+	 * refreshed.  We display questions in choronological order with the newest
+	 * questions on top.  This gives the user the satisfaction of seeing their
+	 * newly created question on top.  Top is almost as good as pro.
 	 */
 	private void refreshQuestions() {
-		Toast.makeText(this, "trying to paint page", Toast.LENGTH_SHORT).show();
+	//	Toast.makeText(this, "trying to paint page", Toast.LENGTH_SHORT).show();
 
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("questions");
+		query.orderByDescending("createdAt");
 		query.findInBackground(new FindCallback<ParseObject>() {
 		    public void done(List<ParseObject> poQuestionList, ParseException e) {
 		        if (e == null) {
-		            Toast.makeText(QuestionsListActivity.this, 
+/*		            Toast.makeText(QuestionsListActivity.this, 
 		            		"found: " + poQuestionList.size(),
-		            		Toast.LENGTH_SHORT).show();
+		            		Toast.LENGTH_SHORT).show();*/
 		            drawPage(Question.convertFromParseObjects(poQuestionList));
 		        } else {
 		        	Toast.makeText(QuestionsListActivity.this, 
@@ -79,24 +82,11 @@ public class QuestionsListActivity extends Activity {
 
 			private void drawPage(List<Question> questionList) {
 				// We have to convert from ParseObject to Question
-				
-				Toast.makeText(QuestionsListActivity.this, "drawing: " + questionList.size(),
-	            		Toast.LENGTH_SHORT).show();
-				
-/*				for (int i=0; i < questionList.size(); i++) {
-					String toastString = i + " " + questionList.get(i).getTitle();
-					Toast.makeText(QuestionsListActivity.this, toastString,
-		            		Toast.LENGTH_SHORT).show();
-				}*/
-				
 				QuestionsAdapter adapter = new QuestionsAdapter(getBaseContext(), questionList);
 				ListView lvQuestions = (ListView) findViewById(R.id.lvQuestions);
 				lvQuestions.setAdapter(adapter);
-				
 			}
 		});
-		
-		
 	}
 
 	@Override
