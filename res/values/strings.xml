@@ -6,15 +6,15 @@
     <string name="hello_world">Hello world!</string>
     <string name="load_title">Anonymous\nRude\nQuestions\nSystem</string>
     <string name="loading_byline">by Team PRO</string>
-    <string name="title_activity_account_creation">AccountCreationActivity</string>
+    <string name="title_activity_account_creation">ARQS</string>
     <string name="accountcreation_instructionstop">Hello FirstName LastName.  You do not have an ARQS account.  Create one by entering a passphrase.  This is distinct from your Backyard password.  We will generate an anonymous username for you.</string>
     <string name="accountcreation_passphrasehint">Create passphrase</string>
     <string name="accountcreation_instructionsbottom">"Your anonymous username will be “ARQSNAME”.  If you do not like this, change your passphrase.  If you do like this, then click the below button. "</string>
     <string name="button_enter">Enter ARQS</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">ARQS</string>
     <string name="login_welcom">Hello.  Enter your passphrase to continue.\n</string>
     <string name="login_passphrasehint">Enter passphrase</string>
-    <string name="title_activity_list">ListActivity</string>
+    <string name="title_activity_list">ARQS</string>
     <string name="list_searchhint">Search….</string>
     <string name="button_submitquestion">Submit Question</string>
     <string name="question_00001">My butt is too big.\nI have a big butt.  Can Yahoo make it smaller?\n10/13/2013 - Steel8231</string>
@@ -22,7 +22,7 @@
     <string name="button_down">DownVote</string>
     <string name="question_00002">Your butt is too big.\nYou have a big butt.  Can Yahoo make it smaller?\n10/13/2013 - Steel8231</string>
     <string name="question_00003">Our butts are too big.\nWe have big butts.  Can Yahoo make them smaller?\n10/13/2013 - Steel8231</string>
-    <string name="title_activity_submit_question">SubmitQuestionActivity</string>
+    <string name="title_activity_submit_question">ARQS</string>
     <string name="submit_instructionstop">Submit your Rude Question\n</string>
     <string name="submit_subjecthint">Subject</string>
     <string name="submit_questionhint">Enter your Rude Question</string>
@@ -46,7 +46,7 @@
         <item>Mine</item>
     </string-array>
 
-    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_menu">ARQS</string>
     <string name="menu_description">This is a simple page to get to all the wire frames.  When we are done, we will launch directly into the Loading activity and make a backdoor to this activity.</string>
     <string name="button_gotoloading">Go to Loading Page</string>
     <string name="button_gotoaccountcreation">Go to Account Creation Page</string>
@@ -54,9 +54,9 @@
     <string name="button_gotolist">Go to mocked up List Page</string>
     <string name="button_gotosubmit">Go to Submit Page</string>
     <string name="title_activity_fragement_submit_question">Fragement_submit_question</string>
-    <string name="title_activity_preview_question">PreviewQuestion</string>
+    <string name="title_activity_preview_question">Preview</string>
     <string name="button_gotoquestions">Go to Questions Page</string>
-    <string name="title_activity_questions">QuestionsActivity</string>
+    <string name="title_activity_questions">ARQS</string>
     <string name="action_compose">Compose</string>
     <string name="action_refresh">Refresh</string>
    	<string name="question_item">question item</string>
