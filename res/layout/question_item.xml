@@ -12,6 +12,11 @@
         android:layout_marginTop="5dp"
         android:contentDescription="@string/question_item" />
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> Including up and down vote button on the question adapter.
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,6 +40,37 @@
             android:id="@+id/tvUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+<<<<<<< HEAD
     </LinearLayout>
 
+=======
+        
+        <TextView
+            android:id="@+id/tvQid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        
+        
+    
+        <Button
+                android:id="@+id/btUp"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_up" />
+
+        <Button
+                android:id="@+id/btDown"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_down" />
+        
+        
+
+
+    </LinearLayout>
+
+
+>>>>>>> Including up and down vote button on the question adapter.
 </LinearLayout>
