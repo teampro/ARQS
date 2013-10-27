@@ -16,15 +16,11 @@ import com.parse.ParseObject;
 
 public class Question {
 	//ParseObject q = new ParseObject("questions");
-<<<<<<< HEAD
-	String user, body, title;
-=======
 	String  user, body, title, qid;
 	
 	public String getQId() {
 		return qid;
 	}
->>>>>>> Including up and down vote button on the question adapter.
 	
 	public String getUser() {
 		return user;
@@ -50,13 +46,10 @@ public class Question {
 		user = s;
 	}
 
-<<<<<<< HEAD
-=======
 	public void addQId(String s) {
 		qid = s;
 	}
 	
->>>>>>> Including up and down vote button on the question adapter.
 	public static ArrayList<Question> convertFromParseObjects(
 			List<ParseObject> poQuestionList) {
 		// Loop through the input, which is of type List, and put its
@@ -65,18 +58,11 @@ public class Question {
 		
 		for (ParseObject po : poQuestionList) {
 			Question q = new Question();
-<<<<<<< HEAD
-			q.addTitle((String) po.get("tittle"));
-			q.addBody((String) po.get("body_content"));
-			q.addUser((String) po.get("username"));
-			
-=======
 			q.addQId((String) po.getObjectId());
 			q.addTitle((String) po.get("tittle"));
 			q.addBody((String) po.get("body_content"));
 			q.addUser((String) po.get("username"));
 		
->>>>>>> Including up and down vote button on the question adapter.
 			al.add(q);
 		}
 
