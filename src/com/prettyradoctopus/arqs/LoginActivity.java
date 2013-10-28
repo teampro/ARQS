@@ -6,13 +6,16 @@ import com.parse.ParseUser;
 import com.prettyradoctopus.arqs.R;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings.Secure;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 
 public class LoginActivity extends Activity {
 	EditText etLoginPassphrase;
@@ -31,8 +34,10 @@ public class LoginActivity extends Activity {
 		return true;
 	}
 	
+	
 	public void onLogin(View v){
 		String u = Secure.getString(this.getContentResolver(),Secure.ANDROID_ID);
+		getPreferences(MODE_PRIVATE).edit().putString("uuid",u).commit();
 		String loginpassphrase = etLoginPassphrase.getText().toString();
 		// Log.d("DEBUG", u);
 		if(!"".equals(loginpassphrase) && loginpassphrase != null) {

@@ -4,6 +4,8 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.provider.Settings.Secure;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseObject;
 import com.prettyradoctopus.arqs.models.Question;
 
 public class QuestionsAdapter extends ArrayAdapter<Question> {
@@ -54,10 +57,20 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
 		
 		
 		final String question_id = question.getQId();
+		
+		
+		
+		//final String username = "somethin";
 		btUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("DEBUG", "Up Vote for qid " + question_id);
+             Log.d("DEBUG", "Up Vote for qid " + question_id);
+             ParseObject vote = new ParseObject("votes"); 
+             vote.put("qid", question_id); 
+           //  vote.put("username", username);
+             vote.put("up", true);
+             vote.put("down", false); 
+             vote.saveInBackground();
 
             //    Toast.makeText(parent.getContext(), "button clicked: " + dataModel.getAnInt(), Toast.LENGTH_SHORT).show();
             }
@@ -67,6 +80,12 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
             @Override
             public void onClick(View view) {
                 Log.d("DEBUG", "Down Vote for qid " + question_id);
+                ParseObject vote = new ParseObject("votes"); 
+                vote.put("qid", question_id); 
+          //      vote.put("username", username);
+                vote.put("up", false);
+                vote.put("down", true); 
+      			vote.saveInBackground();
 
             //    Toast.makeText(parent.getContext(), "button clicked: " + dataModel.getAnInt(), Toast.LENGTH_SHORT).show();
             }
@@ -83,6 +102,8 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
 		
 		return view;
 	}
+
+
 	
 	
 }

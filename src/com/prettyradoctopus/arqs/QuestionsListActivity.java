@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings.Secure;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -54,6 +55,7 @@ public class QuestionsListActivity extends Activity {
 		i.putExtra("question", "");
 		startActivity(i);
 	}
+	
 
 	/* 
 	 * This is used when the page is first created and whenever the page is
@@ -95,5 +97,7 @@ public class QuestionsListActivity extends Activity {
 		getMenuInflater().inflate(R.menu.questions, menu);
 		return true;
 	}
+	
+	
 
 }

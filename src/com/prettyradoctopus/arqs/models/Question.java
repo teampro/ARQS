@@ -3,6 +3,11 @@ package com.prettyradoctopus.arqs.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.provider.Settings.Secure;
+
 import com.parse.ParseObject;
 
 /*
@@ -16,7 +21,8 @@ import com.parse.ParseObject;
 
 public class Question {
 	//ParseObject q = new ParseObject("questions");
-	String  user, body, title, qid;
+	String  user, body, title, qid, username;
+
 	
 	public String getQId() {
 		return qid;
