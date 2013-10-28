@@ -3,9 +3,6 @@ package com.prettyradoctopus.arqs;
 import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.provider.Settings.Secure;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,14 +11,28 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.parse.ParseObject;
 import com.prettyradoctopus.arqs.models.Question;
 
 public class QuestionsAdapter extends ArrayAdapter<Question> {
+	String username = "defaultuser";
+	
 	public QuestionsAdapter(Context context, List<Question> questionList) {
 		super(context, 0, questionList);
+	}
+
+	/**
+	 * This constructor accepts the username from QuestionsListActivity (or anywhere else in the future)
+	 * @param context
+	 * @param questionList
+	 * @param username		String that represents the ANDROID_ID for now - will be something 
+	 * 						more human later.
+	 */
+	public QuestionsAdapter(Context context, List<Question> questionList,
+			String username) {
+		super(context, 0, questionList);
+		this.username = username;
 	}
 
 	@Override
@@ -64,10 +75,12 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
 		btUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+        		//String u = Secure.getString(LoginActivity.getContentResolver(),Secure.ANDROID_ID);
+            	//String username = Configuration.getUsername();
              Log.d("DEBUG", "Up Vote for qid " + question_id);
              ParseObject vote = new ParseObject("votes"); 
              vote.put("qid", question_id); 
-           //  vote.put("username", username);
+             vote.put("username", username);
              vote.put("up", true);
              vote.put("down", false); 
              vote.saveInBackground();

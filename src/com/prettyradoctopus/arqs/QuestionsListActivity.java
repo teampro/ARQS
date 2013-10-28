@@ -84,7 +84,9 @@ public class QuestionsListActivity extends Activity {
 
 			private void drawPage(List<Question> questionList) {
 				// We have to convert from ParseObject to Question
-				QuestionsAdapter adapter = new QuestionsAdapter(getBaseContext(), questionList);
+				// QuestionsAdapter adapter = new QuestionsAdapter(getBaseContext(), questionList);
+				String username = Secure.getString(getContentResolver(),Secure.ANDROID_ID);
+				QuestionsAdapter adapter = new QuestionsAdapter(getBaseContext(), questionList, username);
 				ListView lvQuestions = (ListView) findViewById(R.id.lvQuestions);
 				lvQuestions.setAdapter(adapter);
 			}
