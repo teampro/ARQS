@@ -95,7 +95,7 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
                 Log.d("DEBUG", "Down Vote for qid " + question_id);
                 ParseObject vote = new ParseObject("votes"); 
                 vote.put("qid", question_id); 
-          //      vote.put("username", username);
+                vote.put("username", username);
                 vote.put("up", false);
                 vote.put("down", true); 
       			vote.saveInBackground();
