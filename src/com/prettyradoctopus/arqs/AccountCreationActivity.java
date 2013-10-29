@@ -83,7 +83,7 @@ public class AccountCreationActivity extends Activity {
 
 	protected void myUserSignedUpSuccessfully() {
 		Toast.makeText(this, "Hurrah, you have signed up successfully", Toast.LENGTH_LONG).show();
-		Intent i = new Intent(this, ListActivity.class);
+		Intent i = new Intent(this, LoginActivity.class);
    	 	startActivity(i);		
 	}
 }

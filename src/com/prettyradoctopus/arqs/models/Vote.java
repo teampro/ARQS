@@ -1,7 +1,14 @@
 package com.prettyradoctopus.arqs.models;
 
-import com.parse.ParseClassName;
+import java.util.ArrayList;
+import java.util.List;
+
+import android.util.Log;
+
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+
 
 /*
  * This is the Parse equivalent of the models we used in the Twitter
@@ -11,7 +18,10 @@ import com.parse.ParseObject;
  * 
  * For more details, see https://parse.com/docs/android_guide#subclasses
  */
-@ParseClassName("votes")
-public class Vote extends ParseObject {
+
+public class Vote  {
+	String result;
+	
+	
 
 }

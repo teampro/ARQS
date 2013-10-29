@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.prettyradoctopus.arqs.models.Question;
 
 public class QuestionsAdapter extends ArrayAdapter<Question> {
@@ -33,6 +34,7 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
 			String username) {
 		super(context, 0, questionList);
 		this.username = username;
+		
 	}
 
 	@Override
@@ -78,12 +80,17 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
         		//String u = Secure.getString(LoginActivity.getContentResolver(),Secure.ANDROID_ID);
             	//String username = Configuration.getUsername();
              Log.d("DEBUG", "Up Vote for qid " + question_id);
-             ParseObject vote = new ParseObject("votes"); 
-             vote.put("qid", question_id); 
-             vote.put("username", username);
-             vote.put("up", true);
-             vote.put("down", false); 
-             vote.saveInBackground();
+            // String updown = "up";
+             Boolean up = true;
+             Boolean down = false;
+             QuestionsListActivity.getVoteQuery(question_id, username, up, down);
+             
+         //    ParseObject vote = new ParseObject("votes"); 
+          //   vote.put("qid", question_id); 
+           //  vote.put("username", username);
+           //  vote.put("up", true);
+            // vote.put("down", false); 
+            // vote.saveInBackground();
 
             //    Toast.makeText(parent.getContext(), "button clicked: " + dataModel.getAnInt(), Toast.LENGTH_SHORT).show();
             }
@@ -93,12 +100,16 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
             @Override
             public void onClick(View view) {
                 Log.d("DEBUG", "Down Vote for qid " + question_id);
-                ParseObject vote = new ParseObject("votes"); 
-                vote.put("qid", question_id); 
-                vote.put("username", username);
-                vote.put("up", false);
-                vote.put("down", true); 
-      			vote.saveInBackground();
+              //  String updown = "down";
+                Boolean up = false;
+                Boolean down = true;
+                QuestionsListActivity.getVoteQuery(question_id, username, up, down);
+             //   ParseObject vote = new ParseObject("votes"); 
+              //  vote.put("qid", question_id); 
+               // vote.put("username", username);
+               // vote.put("up", false);
+               // vote.put("down", true); 
+      		//	vote.saveInBackground();
 
             //    Toast.makeText(parent.getContext(), "button clicked: " + dataModel.getAnInt(), Toast.LENGTH_SHORT).show();
             }
