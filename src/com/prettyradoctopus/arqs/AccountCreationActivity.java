@@ -19,71 +19,80 @@ import android.widget.Toast;
 
 public class AccountCreationActivity extends Activity {
 
-	EditText etPassphrase;
-	public String go_no_go;
-	public UUID uuid;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_account_creation);
-			
-		etPassphrase = (EditText) findViewById(R.id.etPassphrase);
-	}
+  EditText etPassphrase;
+  public String go_no_go;
+  public UUID uuid;
+  
+  // Database Helper
+  DatabaseHandler db;
+  
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_account_creation);
+      
+    etPassphrase = (EditText) findViewById(R.id.etPassphrase);
+  }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.account_creation, menu);
-		return true;
-	}
-	
-	public void onSignUp(View v){
-		String u = Secure.getString(this.getContentResolver(),Secure.ANDROID_ID);
-	//	String u = getDeviceUuid().toString();
-		
-		// String u = "02afd98d089897e";
-		
-		 String passphrase = etPassphrase.getText().toString();
-		 Log.d("DEBUG", u);
-		 if(!"".equals(passphrase) && passphrase != null) {
-			 Toast.makeText(this, u, Toast.LENGTH_LONG).show();
-			 
-			 ParseUser user = new ParseUser();
-			 user.setUsername(u);
-			 user.setPassword(passphrase);
-		//	 user.setEmail("email@example.com");
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    // Inflate the menu; this adds items to the action bar if it is present.
+    getMenuInflater().inflate(R.menu.account_creation, menu);
+    return true;
+  }
+  
+  public void onSignUp(View v){
+    String u = Secure.getString(this.getContentResolver(),Secure.ANDROID_ID);
+  //  String u = getDeviceUuid().toString();
+    
+    // String u = "02afd98d089897e";
+    
+     String passphrase = etPassphrase.getText().toString();
+     Log.d("DEBUG", u);
+     if(!"".equals(passphrase) && passphrase != null) {
+       Toast.makeText(this, u, Toast.LENGTH_LONG).show();
+       
+       ParseUser user = new ParseUser();
+       user.setUsername(u);
+       user.setPassword(passphrase);
+    //   user.setEmail("email@example.com");
+       
+      //Store in local database
+          db = new DatabaseHandler(getApplicationContext());
+          db.createUser(u, passphrase);
+          
 
-			 user.signUpInBackground(new SignUpCallback() {
-				  public void done(ParseException e) {
-				    if (e == null) {
-				      // Hooray! Let them use the app now.
-				    //	 String success = "success";
-				    	myUserSignedUpSuccessfully();
-				    	
-				    } else {
-				      // Sign up didn't succeed. Look at the ParseException
-				      // to figure out what went wrong
-				    //	Log.d("DEBUG", e.toString());
-				    	String error = e.toString();
-				    	myUserSignUpDidNotSucceed(error);
-				    	
-				    }
-				  }
-				});	 
-		 }
-		 else {
-			 Toast.makeText(this, "Empty passphrases are not allowed", Toast.LENGTH_LONG).show();
-		 }
-	}
+       user.signUpInBackground(new SignUpCallback() {
+          public void done(ParseException e) {
+            if (e == null) {
+              // Hooray! Let them use the app now.
+            //   String success = "success";
+              myUserSignedUpSuccessfully();
+              
+              
+            } else {
+              // Sign up didn't succeed. Look at the ParseException
+              // to figure out what went wrong
+            //  Log.d("DEBUG", e.toString());
+              String error = e.toString();
+              myUserSignUpDidNotSucceed(error);
+              
+            }
+          }
+        });  
+     }
+     else {
+       Toast.makeText(this, "Empty passphrases are not allowed", Toast.LENGTH_LONG).show();
+     }
+  }
 
-	protected void myUserSignUpDidNotSucceed(String error) {
-		Toast.makeText(this, error, Toast.LENGTH_LONG).show();		
-	}
+  protected void myUserSignUpDidNotSucceed(String error) {
+    Toast.makeText(this, error, Toast.LENGTH_LONG).show();    
+  }
 
-	protected void myUserSignedUpSuccessfully() {
-		Toast.makeText(this, "Hurrah, you have signed up successfully", Toast.LENGTH_LONG).show();
-		Intent i = new Intent(this, LoginActivity.class);
-   	 	startActivity(i);		
-	}
+  protected void myUserSignedUpSuccessfully() {
+    Toast.makeText(this, "Hurrah, you have signed up successfully", Toast.LENGTH_LONG).show();
+    Intent i = new Intent(this, LoginActivity.class);
+      startActivity(i);   
+  }
 }
