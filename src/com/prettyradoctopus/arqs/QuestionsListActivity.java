@@ -37,6 +37,7 @@ public class QuestionsListActivity extends Activity {
 	public static Boolean down;
 	//public List<Question> votes;
 	public List<ParseObject> poQuestionList;
+	public List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +138,7 @@ public class QuestionsListActivity extends Activity {
 	
 	public void queryUped() {
 		
+		
 		String username = Secure.getString(getContentResolver(),Secure.ANDROID_ID);
 		
 		ParseQuery<ParseObject> uped_votes = ParseQuery.getQuery("votes");
@@ -150,14 +152,20 @@ public class QuestionsListActivity extends Activity {
 		        	
 		        	final List<Question> votes = Vote.convertFromParseObjects(voteList);
 		        //	final List<Question> list = Question.convertFromParseObjects(voteList);
+		        	queries.clear();
 		        	for (final ParseObject po : voteList) {
 		    			final Question q = new Question();
 		    			q.addQId((String)  po.get("qid"));
 		    			Log.d("DEBUG", po.get("qid").toString());
 		    			final String qid_to_look = po.get("qid").toString();
-		    		  	ParseQuery<ParseObject> query = ParseQuery.getQuery("questions");
-			    		query.whereEqualTo("objectId", qid_to_look);
-			    		query.findInBackground(new FindCallback<ParseObject>() {
+		    		  	ParseQuery<ParseObject> queryqid = ParseQuery.getQuery("questions");
+		    		  	queryqid.whereEqualTo("objectId", qid_to_look);
+		    		  	
+		    		  	//List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
+		    		  	queries.add(queryqid);
+		    		  	
+		    		  	
+			    		/**	query.findInBackground(new FindCallback<ParseObject>() {
 			    		    public void done(List<ParseObject> poQuestionList, ParseException e) {
 			    		        if (e == null) {
 
@@ -177,12 +185,28 @@ public class QuestionsListActivity extends Activity {
 			    		    }
 			    		    
 			    			
-			    		});
+			    		});*/
 			    		//drawPage(Question.convertFromParseObjects(poQuestionList));
 		    		}
+		        	ParseQuery<ParseObject> query = ParseQuery.or(queries);;
+					
+					query.orderByDescending("createdAt");
+					query.findInBackground(new FindCallback<ParseObject>() {
+					    public void done(List<ParseObject> QuestionsList, ParseException e) {
+					        if (e == null) {
+
+					            drawPage(Question.convertFromParseObjects(QuestionsList));
+					        } else {
+					        	Toast.makeText(QuestionsListActivity.this, 
+					            		"Error pulling questions",
+					            		Toast.LENGTH_LONG).show();
+					        }
+					    }
+
+						
+					});
 		        	
-				//	drawPage(Question.convertFromParseObjects(poQuestionList));
-		        //	drawPage(Question.convertFromParseObjects(poQuestionList));
+		        	
 		        
 		        	
 		      
@@ -212,23 +236,92 @@ public class QuestionsListActivity extends Activity {
 	public void queryDowned() {
 
 		String username = Secure.getString(getContentResolver(),Secure.ANDROID_ID);
-		ParseQuery<ParseObject> query = ParseQuery.getQuery("questions");
-		query.whereEqualTo("username", username);
-		query.orderByDescending("createdAt");
-		query.findInBackground(new FindCallback<ParseObject>() {
-		    public void done(List<ParseObject> poQuestionList, ParseException e) {
+		
+		ParseQuery<ParseObject> uped_votes = ParseQuery.getQuery("votes");
+		uped_votes.whereEqualTo("username", username);
+		uped_votes.whereEqualTo("down", true);
+		uped_votes.findInBackground(new FindCallback<ParseObject>() {
+		    public void done(List<ParseObject> voteList, ParseException e) {
 		        if (e == null) {
+		        
+		     
+		        	
+		        	final List<Question> votes = Vote.convertFromParseObjects(voteList);
+		        //	final List<Question> list = Question.convertFromParseObjects(voteList);
+		        	queries.clear();
+		        	for (final ParseObject po : voteList) {
+		    			final Question q = new Question();
+		    			q.addQId((String)  po.get("qid"));
+		    			Log.d("DEBUG", po.get("qid").toString());
+		    			final String qid_to_look = po.get("qid").toString();
+		    		  	ParseQuery<ParseObject> queryqid = ParseQuery.getQuery("questions");
+		    		  	queryqid.whereEqualTo("objectId", qid_to_look);
+		    		  	
+		    		  	//List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
+		    		  	queries.add(queryqid);
+		    		  	
+		    		  	
+			    		/**	query.findInBackground(new FindCallback<ParseObject>() {
+			    		    public void done(List<ParseObject> poQuestionList, ParseException e) {
+			    		        if (e == null) {
 
-		            drawPage(Question.convertFromParseObjects(poQuestionList));
+			    		            Question.convertFromParseObjects(poQuestionList).add(q);
+			    		            poQuestionList.addAll(poQuestionList);
+			    		           // drawPage(Question.convertFromParseObjects(poQuestionList));
+			    		            Toast.makeText(QuestionsListActivity.this, 
+			    		            		qid_to_look,
+			    		            		Toast.LENGTH_LONG).show();
+			    		
+			    		        } else {
+			    		        	Toast.makeText(QuestionsListActivity.this, 
+			    		            		"Error pulling questions",
+			    		            		Toast.LENGTH_LONG).show();
+			    		        }
+			    		       
+			    		    }
+			    		    
+			    			
+			    		});*/
+			    		//drawPage(Question.convertFromParseObjects(poQuestionList));
+		    		}
+		        	ParseQuery<ParseObject> query = ParseQuery.or(queries);;
+					
+					query.orderByDescending("createdAt");
+					query.findInBackground(new FindCallback<ParseObject>() {
+					    public void done(List<ParseObject> QuestionsList, ParseException e) {
+					        if (e == null) {
+
+					            drawPage(Question.convertFromParseObjects(QuestionsList));
+					        } else {
+					        	Toast.makeText(QuestionsListActivity.this, 
+					            		"Error pulling questions",
+					            		Toast.LENGTH_LONG).show();
+					        }
+					    }
+
+						
+					});
+		        	
+		        	
+		        
+		        	
+		      
+		        	
+		        	
+		            
 		        } else {
 		        	Toast.makeText(QuestionsListActivity.this, 
 		            		"Error pulling questions",
 		            		Toast.LENGTH_LONG).show();
 		        }
+		        
 		    }
 
 			
 		});
+		
+		
+		
 	
 }	
 	
