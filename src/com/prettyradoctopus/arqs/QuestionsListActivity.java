@@ -188,15 +188,27 @@ public class QuestionsListActivity extends Activity {
 			    		});*/
 			    		//drawPage(Question.convertFromParseObjects(poQuestionList));
 		    		}
-		        	ParseQuery<ParseObject> query = ParseQuery.or(queries);;
+		        	if (queries.size() == 0) {
+		        		Toast.makeText(QuestionsListActivity.this, 
+			            		"You dont have questions upped",
+			            		Toast.LENGTH_LONG).show(); }
+		        	else {
+		        	
+		        		ParseQuery<ParseObject> query = ParseQuery.or(queries);;
 					
-					query.orderByDescending("createdAt");
-					query.findInBackground(new FindCallback<ParseObject>() {
-					    public void done(List<ParseObject> QuestionsList, ParseException e) {
-					        if (e == null) {
-
-					            drawPage(Question.convertFromParseObjects(QuestionsList));
-					        } else {
+		        		query.orderByDescending("createdAt");
+		        		query.findInBackground(new FindCallback<ParseObject>() {
+		        			public void done(List<ParseObject> QuestionsList, ParseException e) {
+		        				if (e == null) {
+		        					if (QuestionsList.size() == 0) {
+		        						Toast.makeText(QuestionsListActivity.this, 
+		        								"Error pulling questions",
+		        								Toast.LENGTH_LONG).show();
+		        					} else {
+		        						drawPage(Question.convertFromParseObjects(QuestionsList));
+		        					}
+					            
+		        				} else {
 					        	Toast.makeText(QuestionsListActivity.this, 
 					            		"Error pulling questions",
 					            		Toast.LENGTH_LONG).show();
@@ -210,7 +222,7 @@ public class QuestionsListActivity extends Activity {
 		        
 		        	
 		      
-		        	
+		        	}    	
 		        	
 		            
 		        } else {
@@ -221,7 +233,7 @@ public class QuestionsListActivity extends Activity {
 		        
 		    }
 
-			
+		    	
 		});
 		
 		
@@ -229,7 +241,7 @@ public class QuestionsListActivity extends Activity {
 		
 		 
 		
-	
+		
 	
 }
 	
@@ -261,29 +273,15 @@ public class QuestionsListActivity extends Activity {
 		    		  	queries.add(queryqid);
 		    		  	
 		    		  	
-			    		/**	query.findInBackground(new FindCallback<ParseObject>() {
-			    		    public void done(List<ParseObject> poQuestionList, ParseException e) {
-			    		        if (e == null) {
 
-			    		            Question.convertFromParseObjects(poQuestionList).add(q);
-			    		            poQuestionList.addAll(poQuestionList);
-			    		           // drawPage(Question.convertFromParseObjects(poQuestionList));
-			    		            Toast.makeText(QuestionsListActivity.this, 
-			    		            		qid_to_look,
-			    		            		Toast.LENGTH_LONG).show();
-			    		
-			    		        } else {
-			    		        	Toast.makeText(QuestionsListActivity.this, 
-			    		            		"Error pulling questions",
-			    		            		Toast.LENGTH_LONG).show();
-			    		        }
-			    		       
-			    		    }
-			    		    
-			    			
-			    		});*/
 			    		//drawPage(Question.convertFromParseObjects(poQuestionList));
 		    		}
+		        	
+		        	if (queries.size() == 0) {
+		        		Toast.makeText(QuestionsListActivity.this, 
+			            		"You dont have questions downed",
+			            		Toast.LENGTH_LONG).show(); }
+		        	else {
 		        	ParseQuery<ParseObject> query = ParseQuery.or(queries);;
 					
 					query.orderByDescending("createdAt");
@@ -305,7 +303,7 @@ public class QuestionsListActivity extends Activity {
 		        	
 		        
 		        	
-		      
+		        	}
 		        	
 		        	
 		            
