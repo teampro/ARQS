@@ -20,8 +20,36 @@ import com.parse.ParseQuery;
  */
 
 public class Vote  {
-	String result;
+	String  user, body, title, qid, username;
+
+	
+	public String getQId() {
+		return qid;
+	}
+	
+
+
+	public void addQId(String s) {
+		qid = s;
+	}
+	
+	public static ArrayList<Question> convertFromParseObjects(
+			List<ParseObject> voteList) {
+		// Loop through the input, which is of type List, and put its
+		// contents into an ArrayList.
+		ArrayList<Question> al = new ArrayList<Question>();
+		
+		for (ParseObject po : voteList) {
+			Question q = new Question();
+			q.addQId((String)  po.get("qid"));
+		//	Log.d("DEBUG", po.get("qid").toString());
+			al.add(q);
+		}
+
+		return al;
+	}
+}
 	
 	
 
-}
+

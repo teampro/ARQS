@@ -1,10 +1,12 @@
 package com.prettyradoctopus.arqs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.provider.Settings.Secure;
 import android.util.Log;
@@ -18,6 +20,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.prettyradoctopus.arqs.models.Question;
+import com.prettyradoctopus.arqs.models.Vote;
 
 /*
  * This activity shows all the questions asked so far.  It will
@@ -32,6 +35,8 @@ public class QuestionsListActivity extends Activity {
 	static String question_id, user, updown;
 	public static Boolean up;
 	public static Boolean down;
+	//public List<Question> votes;
+	public List<ParseObject> poQuestionList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,19 @@ public class QuestionsListActivity extends Activity {
 	        case R.id.action_compose:
 	            composeQuestion();
 	            return true;
+	        case R.id.action_query_all:
+	        	queryAll();
+	        	return true;
+	        case R.id.action_query_mine:
+	        	queryMine();
+	        	return true;	
+	        case R.id.action_my_uped:
+	        	queryUped();
+	        	return true;
+	        case R.id.action_my_downed:
+	        	queryDowned();
+	        	return true;
+	        	
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
@@ -70,18 +88,137 @@ public class QuestionsListActivity extends Activity {
 	 * questions on top.  This gives the user the satisfaction of seeing their
 	 * newly created question on top.  Top is almost as good as pro.
 	 */
-	private void refreshQuestions() {
-		question_id = "77EoWAn1fb";
-	//	Toast.makeText(this, "trying to paint page", Toast.LENGTH_SHORT).show();
-		//getVoteQuery(question_id);
+	
+	
+	public void queryAll() {
+
+			ParseQuery<ParseObject> query = ParseQuery.getQuery("questions");
+			query.orderByDescending("createdAt");
+			query.findInBackground(new FindCallback<ParseObject>() {
+			    public void done(List<ParseObject> poQuestionList, ParseException e) {
+			        if (e == null) {
+
+			            drawPage(Question.convertFromParseObjects(poQuestionList));
+			        } else {
+			        	Toast.makeText(QuestionsListActivity.this, 
+			            		"Error pulling questions",
+			            		Toast.LENGTH_LONG).show();
+			        }
+			    }
+
+				
+			});
+		
+	}
+	
+	
+	public void queryMine() {
+
+			String username = Secure.getString(getContentResolver(),Secure.ANDROID_ID);
+			ParseQuery<ParseObject> query = ParseQuery.getQuery("questions");
+			query.whereEqualTo("username", username);
+			query.orderByDescending("createdAt");
+			query.findInBackground(new FindCallback<ParseObject>() {
+			    public void done(List<ParseObject> poQuestionList, ParseException e) {
+			        if (e == null) {
+
+			            drawPage(Question.convertFromParseObjects(poQuestionList));
+			        } else {
+			        	Toast.makeText(QuestionsListActivity.this, 
+			            		"Error pulling questions",
+			            		Toast.LENGTH_LONG).show();
+			        }
+			    }
+
+				
+			});
+		
+	}
+	
+	public void queryUped() {
+		
+		String username = Secure.getString(getContentResolver(),Secure.ANDROID_ID);
+		
+		ParseQuery<ParseObject> uped_votes = ParseQuery.getQuery("votes");
+		uped_votes.whereEqualTo("username", username);
+		uped_votes.whereEqualTo("up", true);
+		uped_votes.findInBackground(new FindCallback<ParseObject>() {
+		    public void done(List<ParseObject> voteList, ParseException e) {
+		        if (e == null) {
+		        
+		     
+		        	
+		        	final List<Question> votes = Vote.convertFromParseObjects(voteList);
+		        //	final List<Question> list = Question.convertFromParseObjects(voteList);
+		        	for (final ParseObject po : voteList) {
+		    			final Question q = new Question();
+		    			q.addQId((String)  po.get("qid"));
+		    			Log.d("DEBUG", po.get("qid").toString());
+		    			final String qid_to_look = po.get("qid").toString();
+		    		  	ParseQuery<ParseObject> query = ParseQuery.getQuery("questions");
+			    		query.whereEqualTo("objectId", qid_to_look);
+			    		query.findInBackground(new FindCallback<ParseObject>() {
+			    		    public void done(List<ParseObject> poQuestionList, ParseException e) {
+			    		        if (e == null) {
+
+			    		            Question.convertFromParseObjects(poQuestionList).add(q);
+			    		            poQuestionList.addAll(poQuestionList);
+			    		           // drawPage(Question.convertFromParseObjects(poQuestionList));
+			    		            Toast.makeText(QuestionsListActivity.this, 
+			    		            		qid_to_look,
+			    		            		Toast.LENGTH_LONG).show();
+			    		
+			    		        } else {
+			    		        	Toast.makeText(QuestionsListActivity.this, 
+			    		            		"Error pulling questions",
+			    		            		Toast.LENGTH_LONG).show();
+			    		        }
+			    		       
+			    		    }
+			    		    
+			    			
+			    		});
+			    		//drawPage(Question.convertFromParseObjects(poQuestionList));
+		    		}
+		        	
+				//	drawPage(Question.convertFromParseObjects(poQuestionList));
+		        //	drawPage(Question.convertFromParseObjects(poQuestionList));
+		        
+		        	
+		      
+		        	
+		        	
+		            
+		        } else {
+		        	Toast.makeText(QuestionsListActivity.this, 
+		            		"Error pulling questions",
+		            		Toast.LENGTH_LONG).show();
+		        }
+		        
+		    }
+
+			
+		});
+		
+		
+		
+		
+		 
+		
+	
+	
+}
+	
+	public void queryDowned() {
+
+		String username = Secure.getString(getContentResolver(),Secure.ANDROID_ID);
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("questions");
+		query.whereEqualTo("username", username);
 		query.orderByDescending("createdAt");
 		query.findInBackground(new FindCallback<ParseObject>() {
 		    public void done(List<ParseObject> poQuestionList, ParseException e) {
 		        if (e == null) {
-/*		            Toast.makeText(QuestionsListActivity.this, 
-		            		"found: " + poQuestionList.size(),
-		            		Toast.LENGTH_SHORT).show();*/
+
 		            drawPage(Question.convertFromParseObjects(poQuestionList));
 		        } else {
 		        	Toast.makeText(QuestionsListActivity.this, 
@@ -90,15 +227,25 @@ public class QuestionsListActivity extends Activity {
 		        }
 		    }
 
-			private void drawPage(List<Question> questionList) {
-				// We have to convert from ParseObject to Question
-				// QuestionsAdapter adapter = new QuestionsAdapter(getBaseContext(), questionList);
-				String username = Secure.getString(getContentResolver(),Secure.ANDROID_ID);
-				QuestionsAdapter adapter = new QuestionsAdapter(getBaseContext(), questionList, username);
-				ListView lvQuestions = (ListView) findViewById(R.id.lvQuestions);
-				lvQuestions.setAdapter(adapter);
-			}
+			
 		});
+	
+}	
+	
+	
+	
+	
+	private void refreshQuestions() {
+		queryAll();
+	
+	}
+	
+	private void drawPage(List<Question> questionList) {
+
+		String username = Secure.getString(getContentResolver(),Secure.ANDROID_ID);
+		QuestionsAdapter adapter = new QuestionsAdapter(getBaseContext(), questionList, username);
+		ListView lvQuestions = (ListView) findViewById(R.id.lvQuestions);
+		lvQuestions.setAdapter(adapter);
 	}
 
 	@Override
@@ -111,21 +258,10 @@ public class QuestionsListActivity extends Activity {
 	public static void getVoteQuery(String getQuestionId, String getUserName, Boolean getUp, Boolean getDown) {
 		question_id = getQuestionId;
 		user = getUserName;
-		//updown = getUpDown;
+
 		final Boolean up = getUp;
 		final Boolean down = getDown;
-	//	if (updown == "up") {
-	//		Boolean up = true;
-	//		Boolean down = false;
-	//	} else if (updown == "down") {
-	//		Boolean up = false;
-	//		Boolean down = true;
-//		} else {
-			//Nothing
-//		}
-		// private ListView lv;
-		// lv = (ListView) findViewById(R.id.myList);
-		 
+
 		 ParseQuery<ParseObject> query = ParseQuery.getQuery("votes");
 		 query.whereEqualTo("qid", question_id);
 		 query.whereEqualTo("username", user);

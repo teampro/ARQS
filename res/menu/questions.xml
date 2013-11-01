@@ -1,19 +1,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+    
     <item
         android:id="@+id/action_refresh"
         android:icon="@drawable/ic_action_refresh"
-    	android:showAsAction="ifRoom"
+    	android:showAsAction="always"
         android:title="@string/action_refresh"/>
     <item
         android:id="@+id/action_compose"
         android:icon="@drawable/ic_action_compose"
-    	android:showAsAction="ifRoom"
+    	android:showAsAction="always"
         android:title="@string/action_compose"/>
-
+    <item
+        android:id="@+id/action_select"
+        android:icon="@drawable/ic_action_select"
+    	android:showAsAction="always"
+        android:title="@string/action_compose">
+        <menu>
+            <item android:id="@+id/action_query_all" android:icon="@drawable/ic_action_select" android:showAsAction="always|collapseActionView" android:title="@string/all_questions"/>
+            <item android:id="@+id/action_query_mine" android:icon="@drawable/ic_action_select" android:showAsAction="always|collapseActionView" android:title="@string/my_questions"/>
+            <item android:id="@+id/action_my_uped" android:title="@string/upded" android:icon="@drawable/ic_action_select" android:showAsAction="always|collapseActionView"/>
+            <item android:id="@+id/action_my_downed" android:title="@string/downed" android:icon="@drawable/ic_action_select" android:showAsAction="always|collapseActionView"/>
+        </menu>
+    </item>
 </menu>
