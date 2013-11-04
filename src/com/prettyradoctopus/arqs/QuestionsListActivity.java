@@ -44,6 +44,7 @@ public class QuestionsListActivity extends Activity {
 	public static ArrayList<String> votes_downed = new ArrayList<String>();
 	
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -111,7 +112,7 @@ public class QuestionsListActivity extends Activity {
 					        	query_downed(qid_to_query);
 					    		
 					        	
-					    	//	drawPage(Question.convertFromParseObjects(poQuestionList));
+					    		drawPage(Question.convertFromParseObjects(poQuestionList));
 					    	//	drawPage(Vote.convertFromParseObjects(voteList));
 					        	
 					        }
@@ -122,7 +123,7 @@ public class QuestionsListActivity extends Activity {
 			            		"Error pulling questions",
 			            		Toast.LENGTH_LONG).show();
 			        }
-			        drawPage(Question.convertFromParseObjects(poQuestionList));
+			     //   drawPage(Question.convertFromParseObjects(poQuestionList));
 			       
 			       
 			    }
@@ -168,7 +169,7 @@ public class QuestionsListActivity extends Activity {
 		
 	}
 
-	protected void query_upped(String get_qid_to_query) {
+	protected static void query_upped(String get_qid_to_query) {
 		final String qid_to_query = get_qid_to_query;
 		ParseQuery<ParseObject> uped_votes = ParseQuery.getQuery("votes");
     	uped_votes.whereEqualTo("username", user);
@@ -189,9 +190,9 @@ public class QuestionsListActivity extends Activity {
 		        	}
 		        	
 		        	} else {
-		        	Toast.makeText(QuestionsListActivity.this, 
-		            		"Error pulling votes",
-		            		Toast.LENGTH_LONG).show();
+		        	//Toast.makeText(QuestionsListActivity.this, 
+		            //		"Error pulling votes",
+		            //		Toast.LENGTH_LONG).show();
 		        }
 		        
 		    }
@@ -453,13 +454,16 @@ public class QuestionsListActivity extends Activity {
 		   
 	}
 	
-	public static void getVoteQuery(String getQuestionId, String getUserName, Boolean getUp, Boolean getDown) {
+	public static String getVoteQuery(String getQuestionId, String getUserName, Boolean getUp, Boolean getDown) {
 		question_id = getQuestionId;
 		user = getUserName;
+		String result_from_vote = null;
 	
-
+		//final String result_from_vote;
 		final Boolean up = getUp;
 		final Boolean down = getDown;
+		
+		//String result_from_vote = null;
 
 		 ParseQuery<ParseObject> query = ParseQuery.getQuery("votes");
 		 query.whereEqualTo("qid", question_id);
@@ -469,7 +473,7 @@ public class QuestionsListActivity extends Activity {
 		            if (e == null) {
 		                
 		                for(int i=0;i<votesList.size();i++)  {
-		                     Log.d("data","Retrieved Object is " + votesList.get(i).getString("Date"));  
+		                   
 		                     VotesQuery.add( votesList.get(i).getString("qid"));
 		                     Log.d("DEBUG", votesList.get(i).getString("qid"));
 		                    // String querysize = getString(votesList.size());
@@ -481,7 +485,11 @@ public class QuestionsListActivity extends Activity {
 		                	 Log.d("DEBUG", "Yuppi, no records found, the size is " + votesList.size() + " in list " );
 		                		//String u = Secure.getString(LoginActivity.getContentResolver(),Secure.ANDROID_ID);
 		                 	//String username = Configuration.getUsername();
+		                	
 		                  Log.d("DEBUG", "Up Vote for qid " + question_id);
+		                  
+		                  
+		                  
 		                  
 		                  
 		                  
@@ -491,11 +499,16 @@ public class QuestionsListActivity extends Activity {
 		                  vote.put("up", up);
 		                  vote.put("down", down); 
 		                  vote.saveInBackground();
+		                  final String result_from_vote = "TRUE";
+		                  Log.d("DEBUG", result_from_vote);
 
 		                 //    Toast.makeText(parent.getContext(), "button clicked: " + dataModel.getAnInt(), Toast.LENGTH_SHORT
 		                
 		                } else {
 		                	Log.d("DEBUG", "Ohhh Ohhhh, records found, the size is " + votesList.size() + " in list " );
+		                	final String result_from_vote = "FALSE";
+		                	Log.d("DEBUG", result_from_vote);
+		                	
 		                }
 		                
 		            } else {
@@ -504,7 +517,13 @@ public class QuestionsListActivity extends Activity {
 		            }
 		        }
 		    });
-	
+			return result_from_vote;
+			
+			//Log.d("DEBUG", result_from_vote);
+			
+			
+		   
+		    
 	}
 	
 	

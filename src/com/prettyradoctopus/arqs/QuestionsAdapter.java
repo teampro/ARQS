@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.LightingColorFilter;
+import android.os.SystemClock;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,20 +57,20 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
 		titleView.setText(Html.fromHtml(formattedTitle));
 
 		TextView bodyView = (TextView) view.findViewById(R.id.tvBody);
-		String formattedBody = question.getBody() + " - <i>" + question.getUser() + "</i>";
+		String formattedBody = question.getBody() + "";
 		bodyView.setText(Html.fromHtml(formattedBody));
 		
-		TextView usernameView = (TextView) view.findViewById(R.id.tvUsername);
-		String formattedUsername = "<i>vote stuff goes here</i>";
-		usernameView.setText(Html.fromHtml(formattedUsername));
+	//	TextView usernameView = (TextView) view.findViewById(R.id.tvUsername);
+	//	String formattedUsername = "<i>vote stuff goes here</i>";
+		//usernameView.setText(Html.fromHtml(formattedUsername));
 		
-		TextView qidView = (TextView) view.findViewById(R.id.tvQid);
-		String formattedQid = "<b>" + question.getQId() + "</b>";
-		qidView.setText(Html.fromHtml(formattedQid));
+	//	TextView qidView = (TextView) view.findViewById(R.id.tvQid);
+	//	String formattedQid = "<b>" + question.getQId() + "</b>";
+	//	qidView.setText(Html.fromHtml(formattedQid));
 		
 		final Button btUp = (Button) view.findViewById(R.id.btUp);
 		
-		Button btDown = (Button) view.findViewById(R.id.btDown);
+		final Button btDown = (Button) view.findViewById(R.id.btDown);
 		
 		
 		
@@ -125,6 +126,19 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
              Boolean down = false;
              QuestionsListActivity.getVoteQuery(question_id, username, up, down);
              
+            String up_result = QuestionsListActivity.checkVoteUp(question_id);
+     		String down_result = QuestionsListActivity.checkVoteDowned(question_id);
+     		if (up_result == "TRUE" | down_result == "TRUE"){
+     			
+     		} else {
+     			btUp.setBackgroundColor(0xFFFFF00);
+     		}
+     		
+     			
+     			
+     	
+             
+             
          
             }
         });
@@ -137,6 +151,16 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
                 Boolean up = false;
                 Boolean down = true;
                 QuestionsListActivity.getVoteQuery(question_id, username, up, down);
+                
+                String up_result = QuestionsListActivity.checkVoteUp(question_id);
+         		String down_result = QuestionsListActivity.checkVoteDowned(question_id);
+         		if (up_result == "TRUE" | down_result == "TRUE"){
+         			
+         		} else {
+         			btDown.setBackgroundColor(0xFFFFF00);
+         		}
+             //   String vote_result =  QuestionsListActivity.getVoteQuery(question_id, username, up, down);
+             //   Log.d("DEBUG", vote_result);
             
             }
         });
