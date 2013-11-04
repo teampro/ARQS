@@ -65,5 +65,7 @@
    	<string name="upded">Uped Questions</string>
    	<string name="upped">Upped Questions</string>
    	<string name="downed">Downed Questions</string>
+   	<string name="Register">Register</string>
+   	<string name="register_phone">Register Your Phone with ARQS</string>
     
 </resources>

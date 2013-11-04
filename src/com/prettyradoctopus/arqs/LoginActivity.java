@@ -1,6 +1,8 @@
 package com.prettyradoctopus.arqs;
 
 import com.parse.LogInCallback;
+import com.parse.Parse;
+import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.prettyradoctopus.arqs.R;
@@ -25,6 +27,9 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		etLoginPassphrase = (EditText) findViewById(R.id.etLoginPassphrase);
+		Parse.initialize(this, "sOb0qqC2Cetj5Aiw4RAQlLvF4lQEz4tJTobQBG7D", 
+				"U6jMtz0vkTqtICvZhvrfKAsKadx56XRi0UfO3yii"); 
+		ParseAnalytics.trackAppOpened(getIntent());
 	}
 
 	@Override
@@ -71,5 +76,11 @@ public class LoginActivity extends Activity {
 				Toast.LENGTH_LONG).show();
 		Intent i = new Intent(this, QuestionsListActivity.class);
    	 	startActivity(i);
+	}
+	
+	public void onAccountCreation(View v) {
+		Toast.makeText(this, "Switching to Account Creation", Toast.LENGTH_SHORT).show();
+		Intent acIntent = new Intent(this, AccountCreationActivity.class);
+		startActivity(acIntent);
 	}
 }

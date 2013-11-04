@@ -34,9 +34,28 @@
         android:id="@+id/btnLoginEnter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/etLoginPassphrase"
         android:layout_centerHorizontal="true"
         android:onClick="onLogin"
         android:text="@string/button_enter" />
+
+    <Button
+        android:id="@+id/btRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="54dp"
+        android:onClick="onAccountCreation"
+        android:text="@string/Register" />
+
+    <TextView
+        android:id="@+id/tvDontHave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btRegister"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:text="@string/register_phone" />
 
 </RelativeLayout>
