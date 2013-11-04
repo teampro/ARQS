@@ -3,6 +3,7 @@ package com.prettyradoctopus.arqs;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.LightingColorFilter;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.prettyradoctopus.arqs.models.Question;
@@ -64,35 +67,65 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
 		String formattedQid = "<b>" + question.getQId() + "</b>";
 		qidView.setText(Html.fromHtml(formattedQid));
 		
-		Button btUp = (Button) view.findViewById(R.id.btUp);
+		final Button btUp = (Button) view.findViewById(R.id.btUp);
 		
 		Button btDown = (Button) view.findViewById(R.id.btDown);
+		
 		
 		
 		final String question_id = question.getQId();
 		
 		
+	//	QuestionsListActivity.checkVote(question_id, username);
 		
-		//final String username = "somethin";
+	//	Boolean result = QuestionsListActivity.checkVote(question_id, username);
+		
+		
+		//for up button
+		
+		//String s = "xeqDvd1px1";
+		
+		String up_result = QuestionsListActivity.checkVoteUp(question_id);
+		String down_result = QuestionsListActivity.checkVoteDowned(question_id);
+		if (up_result == "TRUE"){
+			btUp.setBackgroundColor(0xFFFFF00);
+			
+			
+		} else {
+			btUp.setBackgroundColor(0xCCCCCCCC);
+		}
+		
+		if (down_result == "TRUE"){
+			btDown.setBackgroundColor(0xFFFFF00);
+			
+			
+		} else {
+			btDown.setBackgroundColor(0xCCCCCCCC);
+		}
+
+
+		
+		
+	//	for down buton
+				
+		
+		
+		
+		
+		
+		
+	
 		btUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-        		//String u = Secure.getString(LoginActivity.getContentResolver(),Secure.ANDROID_ID);
-            	//String username = Configuration.getUsername();
+        		
              Log.d("DEBUG", "Up Vote for qid " + question_id);
-            // String updown = "up";
+           
              Boolean up = true;
              Boolean down = false;
              QuestionsListActivity.getVoteQuery(question_id, username, up, down);
              
-         //    ParseObject vote = new ParseObject("votes"); 
-          //   vote.put("qid", question_id); 
-           //  vote.put("username", username);
-           //  vote.put("up", true);
-            // vote.put("down", false); 
-            // vote.saveInBackground();
-
-            //    Toast.makeText(parent.getContext(), "button clicked: " + dataModel.getAnInt(), Toast.LENGTH_SHORT).show();
+         
             }
         });
 		
@@ -100,18 +133,11 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
             @Override
             public void onClick(View view) {
                 Log.d("DEBUG", "Down Vote for qid " + question_id);
-              //  String updown = "down";
+             
                 Boolean up = false;
                 Boolean down = true;
                 QuestionsListActivity.getVoteQuery(question_id, username, up, down);
-             //   ParseObject vote = new ParseObject("votes"); 
-              //  vote.put("qid", question_id); 
-               // vote.put("username", username);
-               // vote.put("up", false);
-               // vote.put("down", true); 
-      		//	vote.saveInBackground();
-
-            //    Toast.makeText(parent.getContext(), "button clicked: " + dataModel.getAnInt(), Toast.LENGTH_SHORT).show();
+            
             }
         });
 		

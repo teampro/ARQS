@@ -37,7 +37,12 @@ public class QuestionsListActivity extends Activity {
 	public static Boolean down;
 	//public List<Question> votes;
 	public List<ParseObject> poQuestionList;
+	public List<ParseObject> voteList;
 	public List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
+	public static String result;
+	public static ArrayList<String> votes_upped = new ArrayList<String>();
+	public static ArrayList<String> votes_downed = new ArrayList<String>();
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -98,21 +103,105 @@ public class QuestionsListActivity extends Activity {
 			query.findInBackground(new FindCallback<ParseObject>() {
 			    public void done(List<ParseObject> poQuestionList, ParseException e) {
 			        if (e == null) {
-
-			            drawPage(Question.convertFromParseObjects(poQuestionList));
+			        	 for (Question test : Question.convertFromParseObjects(poQuestionList)) {
+					        	final String qid_to_query = test.getQId();
+					        	Log.d("DEBUG", qid_to_query);
+					        	
+					        	query_upped(qid_to_query);
+					        	query_downed(qid_to_query);
+					    		
+					        	
+					    	//	drawPage(Question.convertFromParseObjects(poQuestionList));
+					    	//	drawPage(Vote.convertFromParseObjects(voteList));
+					        	
+					        }
+			        //    drawPage(Question.convertFromParseObjects(poQuestionList));
+			        	 
 			        } else {
 			        	Toast.makeText(QuestionsListActivity.this, 
 			            		"Error pulling questions",
 			            		Toast.LENGTH_LONG).show();
 			        }
+			        drawPage(Question.convertFromParseObjects(poQuestionList));
+			       
+			       
 			    }
 
 				
 			});
-		
+			
+			
 	}
 	
 	
+	protected void query_downed(String get_qid_to_query) {
+		final String qid_to_query = get_qid_to_query;
+		ParseQuery<ParseObject> downed_votes = ParseQuery.getQuery("votes");
+    	downed_votes.whereEqualTo("username", user);
+    	downed_votes.whereEqualTo("qid", qid_to_query);
+    	downed_votes.whereEqualTo("down", true);
+    	downed_votes.findInBackground(new FindCallback<ParseObject>() {
+		    public void done(List<ParseObject> voteListDowned, ParseException e) {
+		    	//ArrayList<String> votes_upped = new ArrayList<String>();
+		        if (e == null) {
+		        	final List<Question> votesdowned = Vote.convertFromParseObjects(voteListDowned);
+		        	if (votesdowned.size() == 0) {
+		        		Log.d("DEBUG", "NO UPPED");
+		        		
+		        		
+		        	} else {
+		        	//	Log.d("DEBUG", qid_to_query + " UPPED");
+		        		votes_downed.add(qid_to_query);
+		        	}
+		        	
+		        	} else {
+		        	Toast.makeText(QuestionsListActivity.this, 
+		            		"Error pulling votes",
+		            		Toast.LENGTH_LONG).show();
+		        }
+		        
+		    }
+		    
+		    	
+		});
+	
+		
+	}
+
+	protected void query_upped(String get_qid_to_query) {
+		final String qid_to_query = get_qid_to_query;
+		ParseQuery<ParseObject> uped_votes = ParseQuery.getQuery("votes");
+    	uped_votes.whereEqualTo("username", user);
+    	uped_votes.whereEqualTo("qid", qid_to_query);
+		uped_votes.whereEqualTo("up", true);
+		uped_votes.findInBackground(new FindCallback<ParseObject>() {
+		    public void done(List<ParseObject> voteListUpped, ParseException e) {
+		    	//ArrayList<String> votes_upped = new ArrayList<String>();
+		        if (e == null) {
+		        	final List<Question> votes = Vote.convertFromParseObjects(voteListUpped);
+		        	if (votes.size() == 0) {
+		        		Log.d("DEBUG", "NO UPPED");
+		        		
+		        		
+		        	} else {
+		        	//	Log.d("DEBUG", qid_to_query + " UPPED");
+		        		votes_upped.add(qid_to_query);
+		        	}
+		        	
+		        	} else {
+		        	Toast.makeText(QuestionsListActivity.this, 
+		            		"Error pulling votes",
+		            		Toast.LENGTH_LONG).show();
+		        }
+		        
+		    }
+		    
+		    	
+		});
+	
+		
+	}
+
 	public void queryMine() {
 
 			String username = Secure.getString(getContentResolver(),Secure.ANDROID_ID);
@@ -165,27 +254,7 @@ public class QuestionsListActivity extends Activity {
 		    		  	queries.add(queryqid);
 		    		  	
 		    		  	
-			    		/**	query.findInBackground(new FindCallback<ParseObject>() {
-			    		    public void done(List<ParseObject> poQuestionList, ParseException e) {
-			    		        if (e == null) {
 
-			    		            Question.convertFromParseObjects(poQuestionList).add(q);
-			    		            poQuestionList.addAll(poQuestionList);
-			    		           // drawPage(Question.convertFromParseObjects(poQuestionList));
-			    		            Toast.makeText(QuestionsListActivity.this, 
-			    		            		qid_to_look,
-			    		            		Toast.LENGTH_LONG).show();
-			    		
-			    		        } else {
-			    		        	Toast.makeText(QuestionsListActivity.this, 
-			    		            		"Error pulling questions",
-			    		            		Toast.LENGTH_LONG).show();
-			    		        }
-			    		       
-			    		    }
-			    		    
-			    			
-			    		});*/
 			    		//drawPage(Question.convertFromParseObjects(poQuestionList));
 		    		}
 		        	if (queries.size() == 0) {
@@ -346,9 +415,48 @@ public class QuestionsListActivity extends Activity {
 		return true;
 	}
 	
+	public static String checkVoteUp(String getQuestionId) {
+		question_id = getQuestionId;
+		//user = getUserName;
+		//Boolean checkboolean = getBoolean;
+		
+		
+		
+		   if( votes_upped.contains( question_id ) ) {
+		     Log.d("DEBUG", "Votes upped");
+		     result = "TRUE";
+		   } else {
+			   Log.d("DEBUG", "NOTHING");
+			   result = "FALSE";
+		   }
+		   return result;
+	
+		   
+	}
+	
+	public static String checkVoteDowned(String getQuestionId) {
+		question_id = getQuestionId;
+		//user = getUserName;
+		//Boolean checkboolean = getBoolean;
+		
+		
+		
+		   if( votes_downed.contains( question_id ) ) {
+		     Log.d("DEBUG", "Votes upped");
+		     result = "TRUE";
+		   } else {
+			   Log.d("DEBUG", "NOTHING");
+			   result = "FALSE";
+		   }
+		   return result;
+	
+		   
+	}
+	
 	public static void getVoteQuery(String getQuestionId, String getUserName, Boolean getUp, Boolean getDown) {
 		question_id = getQuestionId;
 		user = getUserName;
+	
 
 		final Boolean up = getUp;
 		final Boolean down = getDown;
@@ -392,10 +500,11 @@ public class QuestionsListActivity extends Activity {
 		                
 		            } else {
 		                Log.d("DEBUG", e.getMessage());
+		                
 		            }
 		        }
 		    });
-	//return result;
+	
 	}
 	
 	

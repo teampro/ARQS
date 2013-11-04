@@ -3,6 +3,10 @@ package com.prettyradoctopus.arqs;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.prettyradoctopus.arqs.models.Question;
 
 import android.content.ContentValues;
@@ -11,6 +15,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -124,6 +129,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     
 // Get all questions, put into local db
     public void writeQuestionList(List<Question> questionList){
+    	ParseQuery<ParseObject> query = ParseQuery.getQuery("questions");
+		query.orderByDescending("createdAt");
+		query.findInBackground(new FindCallback<ParseObject>() {
+		    public void done(List<ParseObject> poQuestionList, ParseException e) {
+		        if (e == null) {
+
+		     //       drawPage(Question.convertFromParseObjects(poQuestionList));
+		        } else {
+		    
+		        }
+		    }
+
+			
+		});	
+    	
       SQLiteDatabase db = this.getWritableDatabase();    
         ContentValues values = new ContentValues();
       
