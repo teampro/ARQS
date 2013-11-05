@@ -56,7 +56,7 @@ public class QuestionsListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_questions_list);
-		refreshQuestions();
+		queryAll();
 	}
 
 	// This is called when user hits refresh or compose from action bar.
@@ -71,7 +71,7 @@ public class QuestionsListActivity extends Activity {
 	            composeQuestion();
 	            return true;
 	        case R.id.action_query_all:
-	        	queryAll();
+	        	refreshQuestions();
 	        	return true;
 	        case R.id.action_query_mine:
 	        	queryMine();
@@ -120,9 +120,11 @@ public class QuestionsListActivity extends Activity {
 					        	
 					        	query_downed(qid_to_query);
 					        	query_down_count(qid_to_query);
+					        	
+					        	refreshQuestions();
 					    		
 					        	
-					    		drawPage(Question.convertFromParseObjects(poQuestionList));
+					    	//	drawPage(Question.convertFromParseObjects(poQuestionList));
 					    	//	drawPage(Vote.convertFromParseObjects(voteList));
 					        	
 					        }
@@ -163,6 +165,7 @@ public class QuestionsListActivity extends Activity {
 		        	} else {
 		        	//	Log.d("DEBUG", qid_to_query + " UPPED");
 		        		votes_downed.add(qid_to_query);
+		        		
 		        	}
 		        	
 		        	} else {
@@ -407,7 +410,40 @@ public class QuestionsListActivity extends Activity {
 	
 	
 	private void refreshQuestions() {
-		queryAll();
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("questions");
+		query.orderByDescending("createdAt");
+		query.findInBackground(new FindCallback<ParseObject>() {
+		    public void done(List<ParseObject> poQuestionList, ParseException e) {
+		        if (e == null) {
+		        	 for (Question test : Question.convertFromParseObjects(poQuestionList)) {
+				        	final String qid_to_query = test.getQId();
+				        	Log.d("DEBUG", qid_to_query);
+				        	
+				        	//query_upped(qid_to_query);
+				        	//query_up_count(qid_to_query);
+				        	
+				        //	query_downed(qid_to_query);
+				        //	query_down_count(qid_to_query);
+				    		
+				        	
+				    		drawPage(Question.convertFromParseObjects(poQuestionList));
+				    	//	drawPage(Vote.convertFromParseObjects(voteList));
+				        	
+				        }
+		        //    drawPage(Question.convertFromParseObjects(poQuestionList));
+		        	 
+		        } else {
+		        	Toast.makeText(QuestionsListActivity.this, 
+		            		"Error pulling questions",
+		            		Toast.LENGTH_LONG).show();
+		        }
+		     //   drawPage(Question.convertFromParseObjects(poQuestionList));
+		       
+		       
+		    }
+
+			
+		});
 	
 	}
 	
@@ -511,6 +547,24 @@ public class QuestionsListActivity extends Activity {
 		                  vote.saveInBackground();
 		                  final String result_from_vote = "TRUE";
 		                  Log.d("DEBUG", result_from_vote);
+		                  
+		                  if (up == true){
+		                	  votes_upped.add(question_id);
+		                	  String current_count_string = get_up_count(question_id);
+		                	  int numUp = Integer.parseInt(current_count_string);
+		                	  int numTotalUp = numUp + 1;
+		                	  String strUp = String.valueOf(numTotalUp);
+		                	  list_up_count.put(question_id, strUp);
+		                  } else if (down == true) {
+		                	  votes_downed.add(question_id);
+		                	  String current_count_string = get_down_count(question_id);
+		                	  int numDown = Integer.parseInt(current_count_string);
+		                	  int numTotalDown = numDown + 1;
+		                	  String strDown = String.valueOf(numTotalDown);
+		                	  list_down_count.put(question_id, strDown);
+		                	  
+		                  }
+		                  
 
 		                 //    Toast.makeText(parent.getContext(), "button clicked: " + dataModel.getAnInt(), Toast.LENGTH_SHORT
 		                
@@ -570,6 +624,14 @@ public class QuestionsListActivity extends Activity {
 		
 	}
 	
+	
+	public static String get_up_count(String get_qid_to_query) {
+		String qid = get_qid_to_query;
+		String up_count = list_up_count.get(qid);
+		return up_count;
+		
+	}
+	
 	public static void query_down_count(String get_qid_to_query) {
 		
 		final String qid_to_query = get_qid_to_query;
@@ -603,6 +665,20 @@ public class QuestionsListActivity extends Activity {
 		
 		
 	}
+	
+	public static String get_down_count(String get_qid_to_query) {
+		String qid = get_qid_to_query;
+		String down_count = list_down_count.get(qid);
+		return down_count;
+		
+	}
+	
+	
+
+	
+	
+	
+
 	
 	
 

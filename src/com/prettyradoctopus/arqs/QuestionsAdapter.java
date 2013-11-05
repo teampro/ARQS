@@ -2,7 +2,10 @@ package com.prettyradoctopus.arqs;
 
 import java.util.List;
 
+import android.R.color;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.os.SystemClock;
 import android.text.Html;
@@ -51,13 +54,15 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
 		}
 	
 		Question question = getItem(position);
+		final String tittle = question.getTitle();
+		final String body = question.getBody();
 		
 		TextView titleView = (TextView) view.findViewById(R.id.tvTitle);
-		String formattedTitle = "<b>" + question.getTitle() + "</b>";
+		String formattedTitle = "<b>" + tittle + "</b>";
 		titleView.setText(Html.fromHtml(formattedTitle));
 
 		TextView bodyView = (TextView) view.findViewById(R.id.tvBody);
-		String formattedBody = question.getBody() + "";
+		String formattedBody = body + "";
 		bodyView.setText(Html.fromHtml(formattedBody));
 		
 		
@@ -79,40 +84,39 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
 		
 		final String question_id = question.getQId();
 		
-		TextView countUp = (TextView) view.findViewById(R.id.tvCountUp);
+		final TextView countUp = (TextView) view.findViewById(R.id.tvCountUp);
 		//int vote_up_count = QuestionsListActivity.query_up_count(question_id);
-		//String voteup = Integer.toString(vote_up_count);
+		final String voteup = QuestionsListActivity.get_up_count(question_id);
 		//String formattedcountUp =  vote_up_count;
-	//	countUp.setText(voteup);
+		countUp.setText(voteup);
 		
-		TextView countDown = (TextView) view.findViewById(R.id.tvCountDown);
+		final TextView countDown = (TextView) view.findViewById(R.id.tvCountDown);
 		//int vote_down_count = QuestionsListActivity.query_down_count(question_id);
-		//String votedown = Integer.toString(vote_down_count);
+		final String votedown = QuestionsListActivity.get_down_count(question_id);
 		//String formattedcountUp =  vote_up_count;
-		//countDown.setText(votedown);
+		countDown.setText(votedown);
 		
 		
 	//	QuestionsListActivity.checkVote(question_id, username);
 		
 	//	Boolean result = QuestionsListActivity.checkVote(question_id, username);
-		
-		
-		//for up button
-		
-		//String s = "xeqDvd1px1";
+
 		
 		String up_result = QuestionsListActivity.checkVoteUp(question_id);
 		String down_result = QuestionsListActivity.checkVoteDowned(question_id);
 		if (up_result == "TRUE"){
-			btUp.setBackgroundColor(0xFFFFF00);
+			btUp.setBackgroundColor(Color.GREEN);
 			
 			
 		} else {
 			btUp.setBackgroundColor(0xCCCCCCCC);
 		}
 		
+		
+
+		
 		if (down_result == "TRUE"){
-			btDown.setBackgroundColor(0xFFFFF00);
+			btDown.setBackgroundColor(Color.RED);
 			
 			
 		} else {
@@ -122,7 +126,7 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
 
 		
 		
-	//	for down buton
+	
 				
 		
 		
@@ -139,14 +143,19 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
            
              Boolean up = true;
              Boolean down = false;
-             QuestionsListActivity.getVoteQuery(question_id, username, up, down);
+          ///   QuestionsListActivity.getVoteQuery(question_id, username, up, down);
              
             String up_result = QuestionsListActivity.checkVoteUp(question_id);
      		String down_result = QuestionsListActivity.checkVoteDowned(question_id);
      		if (up_result == "TRUE" | down_result == "TRUE"){
      			
      		} else {
-     			btUp.setBackgroundColor(0xFFFFF00);
+     			QuestionsListActivity.getVoteQuery(question_id, username, up, down);
+     			btUp.setBackgroundColor(Color.GREEN);
+     			int numUp = Integer.parseInt(voteup);
+          	  int numTotalUp = numUp + 1;
+          	  String strUp = String.valueOf(numTotalUp);
+          	  countUp.setText(strUp);
      		}
      		
      			
@@ -165,14 +174,21 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
              
                 Boolean up = false;
                 Boolean down = true;
-                QuestionsListActivity.getVoteQuery(question_id, username, up, down);
+                
                 
                 String up_result = QuestionsListActivity.checkVoteUp(question_id);
          		String down_result = QuestionsListActivity.checkVoteDowned(question_id);
          		if (up_result == "TRUE" | down_result == "TRUE"){
          			
          		} else {
-         			btDown.setBackgroundColor(0xFFFFF00);
+         			QuestionsListActivity.getVoteQuery(question_id, username, up, down);
+         			btDown.setBackgroundColor(Color.RED);
+         			
+         		int numDown = Integer.parseInt(votedown);
+              	  int numTotalDown = numDown + 1;
+              	  String strDown = String.valueOf(numTotalDown);
+              	  countDown.setText(strDown);
+         			
          		}
              //   String vote_result =  QuestionsListActivity.getVoteQuery(question_id, username, up, down);
              //   Log.d("DEBUG", vote_result);
@@ -180,11 +196,20 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
             }
         });
 		
-		
+		//View v = null;
 		view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            	 Log.d("DEBUG", "Clicked the Item");
+         //   QuestionsListActivity.single_item(question_id, tittle, body);
+        	Intent i = new Intent(view.getContext(), SingleQuestion.class);
+     		i.putExtra("qid", question_id);
+     		i.putExtra("tittle", tittle);
+     		i.putExtra("body", body);
+     		i.putExtra("username", username);
+
+     		view.getContext().startActivity(i);
+     		
+     		
             }
         });
 		
