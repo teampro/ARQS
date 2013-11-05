@@ -60,6 +60,9 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
 		String formattedBody = question.getBody() + "";
 		bodyView.setText(Html.fromHtml(formattedBody));
 		
+		
+		
+		
 	//	TextView usernameView = (TextView) view.findViewById(R.id.tvUsername);
 	//	String formattedUsername = "<i>vote stuff goes here</i>";
 		//usernameView.setText(Html.fromHtml(formattedUsername));
@@ -75,6 +78,18 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
 		
 		
 		final String question_id = question.getQId();
+		
+		TextView countUp = (TextView) view.findViewById(R.id.tvCountUp);
+		//int vote_up_count = QuestionsListActivity.query_up_count(question_id);
+		//String voteup = Integer.toString(vote_up_count);
+		//String formattedcountUp =  vote_up_count;
+	//	countUp.setText(voteup);
+		
+		TextView countDown = (TextView) view.findViewById(R.id.tvCountDown);
+		//int vote_down_count = QuestionsListActivity.query_down_count(question_id);
+		//String votedown = Integer.toString(vote_down_count);
+		//String formattedcountUp =  vote_up_count;
+		//countDown.setText(votedown);
 		
 		
 	//	QuestionsListActivity.checkVote(question_id, username);

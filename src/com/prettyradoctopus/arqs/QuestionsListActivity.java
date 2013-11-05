@@ -2,6 +2,7 @@ package com.prettyradoctopus.arqs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
@@ -41,8 +42,14 @@ public class QuestionsListActivity extends Activity {
 	public List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
 	public static String result;
 	public static ArrayList<String> votes_upped = new ArrayList<String>();
+	public static ArrayList<String> votes_upped_all = new ArrayList<String>();
 	public static ArrayList<String> votes_downed = new ArrayList<String>();
-	
+	public static ArrayList<String> votes_downed_all = new ArrayList<String>();
+	public static int up_votes_size;
+	public static int down_votes_size;
+	//public static ArrayList<HashMap<String, String>> list_up_count = new ArrayList<HashMap<String, String>>();
+	public static HashMap<String, String> list_up_count = new HashMap<String, String>();
+	public static HashMap<String, String> list_down_count = new HashMap<String, String>();
 	
 	
 	@Override
@@ -109,7 +116,10 @@ public class QuestionsListActivity extends Activity {
 					        	Log.d("DEBUG", qid_to_query);
 					        	
 					        	query_upped(qid_to_query);
+					        	query_up_count(qid_to_query);
+					        	
 					        	query_downed(qid_to_query);
+					        	query_down_count(qid_to_query);
 					    		
 					        	
 					    		drawPage(Question.convertFromParseObjects(poQuestionList));
@@ -524,6 +534,74 @@ public class QuestionsListActivity extends Activity {
 			
 		   
 		    
+	}
+	
+	public static void query_up_count(String get_qid_to_query) {
+		//int up_votes_size = 0;
+		final String qid_to_query = get_qid_to_query;
+		ParseQuery<ParseObject> uped_votes_count = ParseQuery.getQuery("votes");
+		uped_votes_count.whereEqualTo("qid", qid_to_query);
+		uped_votes_count.whereEqualTo("up", true);
+		uped_votes_count.findInBackground(new FindCallback<ParseObject>() {
+		    public void done(List<ParseObject> voteListUpped, ParseException e) {
+		    	//ArrayList<String> votes_upped = new ArrayList<String>();
+		        if (e == null) {
+		        	final List<Question> votes_up_count = Vote.convertFromParseObjects(voteListUpped);
+		        	
+		        	up_votes_size = votes_up_count.size();
+		        	
+		        	Log.d("DEBUG", qid_to_query + " " + up_votes_size);
+		        //	votes_upped_all.add(qid_to_query + "|" + up_votes_size);
+		        	String votes_up_string = Integer.toString(up_votes_size);
+		        	list_up_count.put(qid_to_query, votes_up_string);
+		        	
+		        	} else {
+		        	//Toast.makeText(QuestionsListActivity.this, 
+		            //		"Error pulling votes",
+		            //		Toast.LENGTH_LONG).show();
+		        }
+		        
+		    }
+		    
+		    	
+		});
+		
+		
+		
+	}
+	
+	public static void query_down_count(String get_qid_to_query) {
+		
+		final String qid_to_query = get_qid_to_query;
+		ParseQuery<ParseObject> uped_votes_count = ParseQuery.getQuery("votes");
+		uped_votes_count.whereEqualTo("qid", qid_to_query);
+		uped_votes_count.whereEqualTo("down", true);
+		uped_votes_count.findInBackground(new FindCallback<ParseObject>() {
+		    public void done(List<ParseObject> voteListUpped, ParseException e) {
+		    	//ArrayList<String> votes_upped = new ArrayList<String>();
+		        if (e == null) {
+		        	final List<Question> votes_down_count = Vote.convertFromParseObjects(voteListUpped);
+		        	
+		        	down_votes_size = votes_down_count.size();
+		        	
+		        	//votes_downed_all.add(qid_to_query + "|" + down_votes_size);
+		        	String votes_down_string = Integer.toString(down_votes_size);
+		        	list_down_count.put(qid_to_query, votes_down_string);
+		        	Log.d("DEBUG", qid_to_query + " " + down_votes_size);
+		        	
+		        	} else {
+		        	//Toast.makeText(QuestionsListActivity.this, 
+		            //		"Error pulling votes",
+		            //		Toast.LENGTH_LONG).show();
+		        }
+		        
+		    }
+		    
+		    	
+		});
+		
+		
+		
 	}
 	
 	

@@ -59,13 +59,15 @@
     <string name="title_activity_questions">ARQS</string>
     <string name="action_compose">Compose</string>
     <string name="action_refresh">Refresh</string>
-   	<string name="question_item">question item</string>
-   	<string name="all_questions">All Questions</string>
-   	<string name="my_questions">My Questions</string>
-   	<string name="upded">Uped Questions</string>
-   	<string name="upped">Upped Questions</string>
-   	<string name="downed">Downed Questions</string>
-   	<string name="Register">Register</string>
-   	<string name="register_phone">Register Your Phone with ARQS</string>
-    
+    <string name="question_item">question item</string>
+    <string name="all_questions">All Questions</string>
+    <string name="my_questions">My Questions</string>
+    <string name="upded">Uped Questions</string>
+    <string name="upped">Upped Questions</string>
+    <string name="downed">Downed Questions</string>
+    <string name="Register">Register</string>
+    <string name="register_phone">Register Your Phone with ARQS</string>
+    <string name="title_activity_single_question">SingleQuestion</string>
+    <string name="zero">0</string>
+
 </resources>
